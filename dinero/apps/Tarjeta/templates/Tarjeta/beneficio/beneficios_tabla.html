@@ -1,0 +1,30 @@
+{% load tablesort %}
+
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Monto</th>
+            <th>Días</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+     <tbody>
+        {% for e in beneficios %}
+            <tr>
+                <td>{{e.producto}}</td>
+                <td>{{e.monto}}</td>
+                <td>
+                    {% for x in e.dias.all %}
+                        {{x}}
+                    {% endfor %}
+                </td>
+                <td>{{e.descripcion}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% block paginator %}
+    {% paginator beneficios request %}
+{% endblock %}

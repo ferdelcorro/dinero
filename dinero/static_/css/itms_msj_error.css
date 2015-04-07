@@ -1,0 +1,26 @@
+.control-group.error input:focus, .control-group.error select:focus, .control-group.error textarea:focus {
+    border-color: rgb(26, 26, 26);
+    box-shadow: 0px 0px 6px rgb(102, 102, 102);
+}
+.control-group.error input, .control-group.error textarea {
+    border: 1px solid rgb(210, 25, 25);
+    margin-bottom: 0;	
+}
+.control-group.error input, .control-group.error select, .control-group.error textarea {
+    color: rgb(51, 51, 51);
+}
+.form-search input, .form-inline input, .form-horizontal input, .form-search textarea, .form-inline textarea, .form-horizontal textarea, .form-search select, .form-inline select, .form-horizontal select, .form-search .help-inline, .form-inline .help-inline, .form-horizontal .help-inline, .form-search .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uneditable-input, .form-search .input-prepend, .form-inline .input-prepend, .form-horizontal .input-prepend, .form-search .input-append, .form-inline .input-append, .form-horizontal .input-append {
+	display: inline-block;
+	margin-bottom: 0px;
+}
+.control-group.error span[id^="error"] {
+    color: rgb(255, 255, 255);
+    background-color: rgb(210, 25, 25);
+    display: block;
+    font-size: 0.9em;
+    font-weight: 400;
+    padding: 5px 15px;
+}
+.form-search input, .form-inline input, .form-horizontal input, .form-search textarea, .form-inline textarea, .form-horizontal textarea, .form-search select, .form-inline select, .form-horizontal select, .form-search .help-inline, .form-inline .help-inline, .form-horizontal .help-inline, .form-search .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uneditable-input, .form-search .input-prepend, .form-inline .input-prepend, .form-horizontal .input-prepend, .form-search .input-append, .form-inline .input-append, .form-horizontal .input-append {
+    margin-bottom: 0px;
+}

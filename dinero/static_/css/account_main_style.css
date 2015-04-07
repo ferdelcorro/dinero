@@ -1,0 +1,58 @@
+#mainContent-container{
+    top:0 !important;
+}
+
+.caption {
+font-size: 12px;
+color: #666;
+font-weight: bold;
+text-decoration: none;
+margin-top: 4px;
+margin-bottom: 2px;
+}
+.section2 {
+color: #444;
+background-color: #ddd;
+}
+.unbordered td {
+border: 0 !important;
+}
+
+.span_chart{
+    margin-left: 0 !important;
+}
+
+.canvas_chart{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.canvas_chart_text{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.section-info{
+    background-color: white;
+}
+
+.act_link{
+    font-size: 12px;
+}
+
+.pkg_include{
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+.s_detail_btns{
+    padding: 8px 15px;
+    margin-top: -30px;
+    list-style: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}

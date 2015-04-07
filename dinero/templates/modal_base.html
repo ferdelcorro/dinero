@@ -1,0 +1,29 @@
+{% load i18n static %}
+
+<div class="modal-content">
+  
+  {% block extra_head %}{%endblock%}
+  
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+    <h4 class="modal-title" id="modal_title">{% block title %}{% endblock %}</h4>
+  </div>
+
+  <div class="modal-body" style="{% block body_style %}{% endblock %}">
+    <div class="waiting collapse" id="modal_wait"><p>Espere por favor...</p></div>
+    {% block body %}{%endblock%}
+    <div id="error_content" style="margin: 20px 10px; {% block body_err %}{% endblock %}">
+        <div class="bs-callout bs-callout-danger">
+        <h4 id="error_msg">Ocurrío un error interno, intente nuevamente</h4>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    {% block footer %}
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+    {%endblock%}
+  </div>
+
+</div>
+{% block extra_footer %}{%endblock%}

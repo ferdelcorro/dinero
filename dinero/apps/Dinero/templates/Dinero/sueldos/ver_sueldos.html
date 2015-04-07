@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <div class='panel panel-default' id="sueldos_id">
+            {% include 'Dinero/sueldos/sueldos_tabla.html' %}
+        </div>
+        
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group btn-group-sm" role="group">
+                <button id="sueldo_year" type="button" class="btn btn-primary" onClick="time('/dinero/s/sueldos_tabla/', 'year', 's')">
+                    AÑO
+                </button>
+            </div>
+            <div class="btn-group btn-group-sm" role="group">
+                <button id="sueldo_all" type="submit" class="btn btn-primary active" onClick="time('/dinero/s/sueldos_tabla/', 'all', 's')">
+                    TODO
+                </button>
+            </div>
+        </div>
+
+
+{% endblock %}

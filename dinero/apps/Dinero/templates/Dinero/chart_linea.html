@@ -1,0 +1,31 @@
+
+<script>
+  google.load('visualization', '1.0', {'packages':['corechart']});
+  google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      try{
+        var data = google.visualization.arrayToDataTable([
+          ['Fecha', 'Sueldo', 'Gastos'],
+          {% for e in datos %}
+            ['{{e.0}}', {{e.1.0}}, {{e.1.1}}],
+          {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Sueldo vs Gastos',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          backgroundColor: 'transparent',
+          legend: 'none',
+          width: 500,
+          height: 300,
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('balance_L'));
+
+        chart.draw(data, options);
+      }catch(err){}
+      
+    }
+</script>

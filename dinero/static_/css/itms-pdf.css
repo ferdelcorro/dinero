@@ -1,0 +1,98 @@
+.header {
+	border-bottom-color: #6A6A6A;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: SegoeUI;
+	font-size: 10px;
+	color: #6A6A6A;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.footer {
+	border-top: 1px solid #6A6A6A;
+	font-size: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+	background-color: #fff;
+	color: #333;
+}
+
+.titulo-report {
+	font-family: SegoeUI;
+	font-size: 34px;
+	padding-right: 0px;
+	padding-bottom: 2px;
+	margin-bottom: 0px;
+}
+
+.subtitulo {
+	color: #444;
+	text-align:right; 
+	font-size:18px; 
+	padding-top:1px;
+	padding-bottom:40px;
+	font-family: SegoeUI;
+}
+
+.titulo1 {
+	font-family: 'SegoeUI';
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 0px;
+	color: #111;
+	padding-left: 0px;
+	padding-bottom: 2px;
+	margin-bottom: 0px;
+}
+
+p {
+	margin-left: 0px;
+	margin-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	font-size: 11px;
+}
+
+.titulo2 {
+	font-family: 'Segoe UI';
+	font-size: 18px;
+	font-weight: 400;			
+	color: #333;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	border-bottom-color: #444;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+.titulo3 {
+	font-family: SegoeUI;
+	font-size: 13px;
+	font-weight: bold;			
+	color: #222;
+	padding-left: 0px;
+}
+
+.content {
+	font-family: SegoeUI;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.t-row {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 0px;
+	text-align: left;
+	border-bottom: 1px dotted #ccc;
+	font-size: 10px;
+}
+
+.t-title {
+	padding: 1px 0 1px 0;
+	border-bottom: 1px solid #222;
+	background-color: #CCC;
+	font-size: 11px;
+}

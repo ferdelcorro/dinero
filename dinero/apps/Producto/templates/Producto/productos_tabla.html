@@ -1,0 +1,28 @@
+{% load tablesort %}
+
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+     <tbody>
+        {% for e in productos %}
+            <tr>
+                <td>{{e.nombre}}</td>
+                <td>
+                    {% if e.descripcion %}
+                        {{e.descripcion}}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% block paginator %}
+    {% paginator productos request %}
+{% endblock %}

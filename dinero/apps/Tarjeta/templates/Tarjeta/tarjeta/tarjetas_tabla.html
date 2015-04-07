@@ -1,0 +1,28 @@
+{% load tablesort %}
+
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Tarjeta</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+     <tbody>
+        {% for e in tarjetas %}
+            <tr>
+                <td>{{e.nombre}}</td>
+                <td>
+                    {% if e.descripcion %}
+                        {{e.descripcion}}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% block paginator %}
+    {% paginator tarjetas request %}
+{% endblock %}

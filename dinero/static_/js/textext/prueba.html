@@ -1,0 +1,55 @@
+<script src="js/jquery-1.8.2.js" type="text/javascript" charset="utf-8"></script>
+
+<link rel="stylesheet" href="css/textext.core.css" type="text/css" />
+<link rel="stylesheet" href="css/textext.plugin.tags.css" type="text/css" />
+<link rel="stylesheet" href="css/textext.plugin.autocomplete.css" type="text/css" />
+<link rel="stylesheet" href="css/textext.plugin.focus.css" type="text/css" />
+<link rel="stylesheet" href="css/textext.plugin.prompt.css" type="text/css" />
+<link rel="stylesheet" href="css/textext.plugin.arrow.css" type="text/css" />
+<script src="js/textext.core.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.tags.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.suggestions.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.filter.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.focus.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.prompt.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.ajax.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/textext.plugin.arrow.js" type="text/javascript" charset="utf-8"></script>
+<textarea id="textarea" rows="1" style="width: 400px;" ></textarea>
+
+<script type="text/javascript">
+    $('#textarea').textext({
+        plugins : 'tags autocomplete arrow'
+        })
+        .bind('getSuggestions', function(e, data)
+        {
+            var list = [
+                    'Basic',
+                    'Closure',
+                    'Cobol',
+                    'Delphi',
+                    'Erlang',
+                    'Fortran',
+                    'Go',
+                    'Groovy',
+                    'Haskel',
+                    'Java',
+                    'JavaScript',
+                    'OCAML',
+                    'PHP',
+                    'Perl',
+                    'Python',
+                    'Ruby',
+                    'Scala'
+                ],
+                textext = $(e.target).textext()[0],
+                query = (data ? data.query : '')
+                ;
+
+            $(this).trigger(
+                'setSuggestions',
+                { result : textext.itemManager().filter(list, query) }
+            );
+        })
+        ;
+</script>

@@ -1,0 +1,116 @@
+.block-header{
+    background-color: #333333;
+    /*height: 20px;*/
+    border: 1px solid #333333;
+    color: #efefef;
+    font-size: 20px;
+    padding: 10px;
+    width: auto;
+}
+
+.block-content {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 60px;
+    color: #555;
+}
+
+.block-content .item {
+    margin-top: 15px;
+    padding-top: 5px;
+}
+.block-content .item:first-child {
+    border-top: none;
+    margin-top: 5px;
+}
+.item h3 {
+    font-size: 18px;
+    font-weight: normal;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+}
+.block-content .big {
+    font-weight: 600;
+    font-size: 18px;
+}
+#container-left .row-fluid {margin-top:20px;}
+#container-left .row-fluid:first-child {margin-top:0px;}
+
+#container-left .height2 {
+    height: 150px;
+}
+#container-left .height2 p {
+    margin-bottom: 1px;
+}
+#container-left h3 {
+    font-weight: 100;
+}
+
+#container-left .block-content .row-fluid {margin-top: 10px}
+
+
+#container-right .block-content {
+    min-height: 420px;
+    margin-bottom: 50px;
+}
+
+
+/* updates list ---------------- */
+.updates-list {
+    margin-top: 10px;
+}
+.udpates-list li {
+    padding: 10px 0;
+    display: table-row; 
+}
+.updates-list .muted {font-size: 11px;}
+.updates-list li div {
+    display: table-cell;
+    padding: 0 5px 10px 0;
+}
+.updates-list li div.col-img {
+    min-width: 30px;
+}
+.updates-list li div.col-img img {margin-top: 15px;}
+
+/*----- Tabs -----*/
+.simple-tabs {}
+
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        list-style:none;
+    }
+ 
+        .tab-links a {
+            display:inline-block;
+            transition:all linear 0.15s;
+            color: #efefef;
+        }
+ 
+        .tab-links a:hover {
+            color:#0088cc;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        color:#0088cc;
+    }
+ 
+    /*----- Content of Tabs -----*/
+        .tab {display:none;}
+        .tab.active {display:block;}
+
+
+#table-tasks td {
+    padding: 2px;
+    border: none;
+    font-size: 12px;
+}

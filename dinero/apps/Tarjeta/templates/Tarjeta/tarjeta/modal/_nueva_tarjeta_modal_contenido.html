@@ -1,0 +1,42 @@
+{% extends 'modal_base.html' %}
+{% block title %}Agregar Tarjeta{% endblock %}
+
+{% block body_style %}padding-bottom: 0; padding-top: 0{% endblock %}
+{% block body_err %}display:none{% endblock %}
+
+{% block body %}
+
+    <div class="row row-eq-height">
+
+        <div class="col-sm-4 pull-left" style="background-color: #efefef; padding: 0px;">
+            <div class="row-fluid" style="padding: 10px">
+                <img src="/static/img/new_project.png" style="width: 100%;">
+            </div>
+            <div class="row-fluid" style="padding: 10px">
+                <p>Please enter the basic information to create your project. You can complete additional information later.</p>
+            </div>
+        </div>
+        <div class="col-sm-8" style="padding-top: 10px">
+            <form id="form_t" action="." class="form" method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label>{{ form.nombre.label }}</label>
+                    {{ form.nombre }} 
+                    {{ form.nombre.errors }} 
+                </div>
+                <div class="form-group">
+                    <label>{{ form.descripcion.label }}</label>
+                    {{ form.descripcion }}
+                    {{ form.descripcion.errors }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <button id="close_tarjeta_modal" type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary pull-right" id="btn-save-tar" onclick="enviar_tarjeta();">Guardar</button>
+{% endblock %}

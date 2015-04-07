@@ -1,0 +1,10 @@
+button[id^="pend-"],
+button[id^="priority-"] {
+    font-size: 11px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.accordion-body
+{
+    background-color: #FFF
+}

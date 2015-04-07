@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class='panel panel-default'>
+        <div class="input-group">
+            <input class="form-control" placeholder="Search..." id="term" onkeypress="search(event, '/producto/')" type="text">
+            <span class="input-group-btn" onclick="library_search('/producto/');">
+                <button class="btn btn-sm btn-primary" type="button">
+                    <!--
+                    <i class="fa fa-search" style="color: white;"></i>
+                    -->+
+                </button>
+            </span>
+        </div>
+        <div id="productos_id">
+            {% include 'Producto/productos_tabla.html' %}
+        </div>
+    </div>
+
+{% endblock %}

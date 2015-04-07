@@ -1,0 +1,38 @@
+[class^="icon-ext-"],
+[class*=" icon-ext-"] {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: .3em;
+  line-height: 24px;
+  vertical-align: text-top;
+  background-image: url("../img/file-icons.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+}
+
+.icon-ext- {
+  background-position: 0 0;	
+}
+
+.icon-ext-pdf {
+  background-position: -21px 0;
+}
+
+.icon-ext-docx, .icon-ext-doc {
+  background-position: -48px 0;
+}
+
+.icon-ext-xlsx, .icon-ext-xls {
+  background-position: -77px 0;
+}
+
+.icon-ext-folder {
+  background-position: -155px 0;
+}
+
+.icon-ext-folder-home {
+  background-position: -128px 0;
+}
+
+
