@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="tarjeta_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 10px">
+<div class="modal fade" id="producto_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 10px">
     <div class="waiting collapse" id="modal_wait"><p>Espere por favor...</p></div>
     <div class="modal-dialog">
         <div class="modal-content">
@@ -11,16 +11,17 @@
                 {% block body %}{% endblock %}
             </div>
             <div class="modal-footer">
-                {% block footer %}{% endblock %}
+                {% block footer %}
+                {% endblock %}
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    function enviar_tarjeta() {
-        var $form = $('#t_form');
-        var url = "/tarjeta/t/cargar_tarjeta_modal/";
+    function enviar_producto() {
+        var $form = $('#p_form');
+        var url = "/producto/cargar_producto_modal/";
         var post_data = $form.serialize();
         //$('#modal_wait').show();
         $.post(url, post_data, function(response){
@@ -33,13 +34,13 @@
                         $('#btn-save-prj').hide();
                         $('#error_content').show();
                     } else {
-                        validate_errors('t_form', response.errors);
+                        validate_errors('p_form', response.errors);
                     }
                     break;
                 case 'OK':
-                    $('#id_tarjeta').append('<option value='+response.tarjeta_id+'>'+response.tarjeta_name+'</option>')
-                    $('#id_tarjeta').val(response.tarjeta_id)
-                    $('#tarjeta_modal').hide();
+                    $('#id_producto').append('<option value='+response.producto_id+'>'+response.producto_name+'</option>')
+                    $('#id_producto').val(response.producto_id)
+                    $('#producto_modal').hide();
             }
         }, 'json');
     }

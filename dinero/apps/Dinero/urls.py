@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^ver_balance/$', 'apps.Dinero.views.ver_balance'),
+    url(r'^filter_balance/$', 'apps.Dinero.views.filter_balance'),
 
     url(
         r'^s/',

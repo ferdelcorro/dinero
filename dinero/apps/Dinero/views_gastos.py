@@ -8,6 +8,8 @@ from django.http import HttpResponseRedirect
 from apps.Dinero.models import Sueldo, Gasto
 
 from apps.Dinero.forms import SueldoForm, GastoForm
+from apps.Tarjeta.forms import TarjetaForm
+from apps.Producto.forms import ProductoForm
 
 from datetime import date, datetime, timedelta
 
@@ -18,6 +20,8 @@ from datetime import date, datetime, timedelta
 @login_required
 def cargar_gasto(request):
     form = GastoForm()
+    t_form = TarjetaForm()
+    p_form = ProductoForm()
 
     if request.method == 'POST':
         form = GastoForm(request.POST)
@@ -25,13 +29,16 @@ def cargar_gasto(request):
             c = form.save(commit=False)
             c.user = request.user
             c.save()
-            return HttpResponseRedirect('base.html')
+            return render_to_response('base.html',RequestContext(request,{}))
+
     return render_to_response(
         'Dinero/gastos/cargar_gasto.html',
         RequestContext(
             request,
             {
                 'form': form,
+                't_form': t_form,
+                'p_form': p_form,
             }
         )
     )
@@ -107,12 +114,4 @@ def gastos_tabla(request):
             }
         )
     )
-
-
-@login_required
-def asd(request):
-
-    return render_to_response(
-        'Dinero/gastos/asd.html',
-        RequestContext(request,{})
-    )
+    

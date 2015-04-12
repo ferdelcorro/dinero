@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import operator
 
+from django.http import Http404
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -41,34 +43,34 @@ def cargar_tarjeta(request):
 
 @login_required
 def cargar_tarjeta_modal(request):
-    print 'modal'
+    from apps.funciones.views import json_response
     form = TarjetaForm()
+    response = {}
 
     if request.method == 'POST':
         form = TarjetaForm(request.POST)
         if form.is_valid():
             try:
-                form.save()
+                t = form.save()
                 response['result'] = 'OK'
+                response['tarjeta_id'] = t.id
+                response['tarjeta_name'] = t.nombre
+                print response
             except:
                 response['result'] = 'ERROR'
                 response['error_type'] = 'OTHER'
+            
         else:
             errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
             response['result'] = 'ERROR'
             response['error_type'] = 'INVALID'
             response['errors'] = errors
+
+        print response
         
         return json_response(response)
-    return render_to_response(
-        'Tarjeta/tarjeta/modal/_cargar_tarjeta_modal_contedino.html',
-        RequestContext(
-            request,
-            {
-                'form': form,
-            }
-        )
-    )
+    else:
+        raise Http404
 
 
 @login_required

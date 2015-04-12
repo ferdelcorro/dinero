@@ -29,7 +29,7 @@ def cargar_producto(request):
             p = form.save(commit=False)
             p.user = request.user
             p.save()
-            return HttpResponseRedirect('base.html')
+            return render_to_response('base.html',RequestContext(request,{}))
     return render_to_response(
         'Producto/cargar_producto.html',
         RequestContext(
@@ -39,6 +39,38 @@ def cargar_producto(request):
             }
         )
     )
+
+
+@login_required
+def cargar_producto_modal(request):
+    from apps.funciones.views import json_response
+    form = ProductoForm()
+    response = {}
+
+    if request.method == 'POST':
+        form = ProductoForm(request.POST)
+        if form.is_valid():
+            try:
+                p = form.save()
+                response['result'] = 'OK'
+                response['producto_id'] = p.id
+                response['producto_name'] = p.nombre
+                print response
+            except:
+                response['result'] = 'ERROR'
+                response['error_type'] = 'OTHER'
+            
+        else:
+            errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
+            response['result'] = 'ERROR'
+            response['error_type'] = 'INVALID'
+            response['errors'] = errors
+            
+        print response
+
+        return json_response(response)
+    else:
+        raise Http404
 
 
 @login_required

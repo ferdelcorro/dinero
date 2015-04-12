@@ -1,0 +1,19 @@
+{% load filters %}
+
+<div class="row text-center">
+    <p>
+        {% if total_sueldos|diference:total_gastos < 0 %}
+            <spam style="color: red">
+                $ {{ total_sueldos|diference:total_gastos|absolute }}
+            </spam>
+        {% else %}
+            <spam style="color: green">
+                $ {{ total_sueldos|diference:total_gastos|absolute }}
+            </spam>
+        {% endif %}
+    </p>
+    <p> Sueldo ${{total_sueldos}} - Gastos ${{total_gastos}}</p>
+</div>
+<div class="row">
+    {% include 'Dinero/balances/charts.html' %}
+</div>

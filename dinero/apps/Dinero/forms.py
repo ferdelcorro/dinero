@@ -25,7 +25,15 @@ class SueldoForm(ModelForm):
                 'style': 'display: inline; width: 50%'}
                 ),
         }
+    """
+    def clean(self):
+        monto = self.cleaned_data['monto']
 
+        if monto < 0:
+            raise forms.ValidationError('El monto debe ser positivo')
+
+        return self.cleaned_data
+    """
 
 class GastoForm(ModelForm):
 

@@ -13,5 +13,4 @@ def diference(num1, arg):
 
 @register.filter(name='absolute')
 def diference(num1):
-    print 'pepe'
     return fabs(num1)

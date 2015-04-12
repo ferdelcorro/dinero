@@ -29,7 +29,10 @@ class Tarjeta(models.Model):
 
 
 class Dia(models.Model):
-    dia = models.CharField('Día de la semana', max_length=30)
+    dia = models.CharField(
+        'Día de la semana',
+        max_length=2, choices=DIA,
+    )
 
     def __unicode__(self):
         return self.dia

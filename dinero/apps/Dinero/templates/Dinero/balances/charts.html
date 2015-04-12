@@ -1,0 +1,52 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script>
+    google.load('visualization', '1.0', {'callback': drawChart, packages:["corechart"]});
+
+    function drawChart() {
+        try{
+          var data = google.visualization.arrayToDataTable([
+                ['Dinero', 'Movimiento'],
+                ['Sueldo',     {{total_sueldos}}],
+                ['Gastos',      {{total_gastos}}],
+              ]);
+
+              var options = {
+                backgroundColor: 'transparent',
+                legend: 'none',
+                width: 500,
+                height: 300,
+              };
+
+
+            var data2 = google.visualization.arrayToDataTable([
+                ['Fecha', 'Sueldo', 'Gastos'],
+                {% for e in datos %}
+                ['{{e.0}}', {{e.1.0}}, {{e.1.1}}],
+                {% endfor %}
+            ]);
+
+            var options2 = {
+                title: 'Sueldo vs Gastos',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                backgroundColor: 'transparent',
+                legend: 'none',
+                width: 500,
+                height: 300,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('balance_T'));
+            chart.draw(data, options);
+            var chart2 = new google.visualization.LineChart(document.getElementById('balance_L'));
+            chart2.draw(data2, options2);
+        }catch(err){}
+    }
+</script>
+
+<div class="col-md-6">
+    <div id="balance_L"></div>
+</div>
+
+<div class="col-md-6">
+    <div id="balance_T"></div>
+</div>

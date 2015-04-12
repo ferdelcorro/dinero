@@ -1,6 +1,6 @@
-{% extends 'Tarjeta/tarjeta/modal/_nueva_tarjeta_modal.html' %}
+{% extends 'Producto/modal/_nuevo_producto_modal.html' %}
 
-{% block title %}Agregar Tarjeta{% endblock %}
+{% block title %}Agregar Producto{% endblock %}
 
 {% block body %}
 
@@ -11,20 +11,20 @@
             </div>
         </div>
         <div class="col-sm-8" style="padding-top: 10px">
-            <form id="t_form" action="." class="form" method="post">
+            <form id="p_form" action="." class="form" method="post">
                 {% csrf_token %}
                 
                 <div class="form-group">
-                    <label>{{ t_form.nombre.label }}</label>
+                    <label>{{ p_form.nombre.label }}</label>
                     <br>
-                    {{ t_form.nombre }} 
-                    {{ t_form.nombre.errors }} 
+                    {{ p_form.nombre }} 
+                    {{ p_form.nombre.errors }} 
                 </div>
                 <div class="form-group">
-                    <label>{{ t_form.descripcion.label }}</label>
+                    <label>{{ p_form.descripcion.label }}</label>
                     <br>
-                    {{ t_form.descripcion }}
-                    {{ t_form.descripcion.errors }}
+                    {{ p_form.descripcion }}
+                    {{ p_form.descripcion.errors }}
                 </div>
 
             </form>
@@ -35,5 +35,5 @@
 
 {% block footer %}
     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary" onclick="enviar_tarjeta();">Guardar</button>
+    <button type="button" class="btn btn-primary" onclick="enviar_producto();">Guardar</button>
 {% endblock %}
