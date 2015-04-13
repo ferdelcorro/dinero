@@ -65,8 +65,6 @@ def cargar_producto_modal(request):
             response['result'] = 'ERROR'
             response['error_type'] = 'INVALID'
             response['errors'] = errors
-            
-        print response
 
         return json_response(response)
     else:

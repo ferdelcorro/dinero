@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
@@ -100,3 +100,34 @@ def sueldos_tabla(request):
             }
         )
     )
+
+
+def borrar_sueldo(request):
+    response = {}
+    form = SueldoForm()
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        sueldo = get_object_or_404(Sueldo, pk=pk, user=request.user)
+        return render_to_response(
+            'Dinero/sueldos/modal/_borrar_sueldo_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'sueldo': sueldo,
+                    'form': form,
+                }
+            )
+        )
+
+    from apps.funciones.views import json_response
+    pk = request.POST.get('id', None)
+    sueldo = get_object_or_404(Sueldo, pk=pk, user=request.user)
+
+    try:
+        sueldos.delete()
+        response['result'] = 'OK'
+    except:
+        response['result'] = 'ERROR'
+    print response
+    return json_response(response)

@@ -2300,6 +2300,7 @@ fieldset[disabled] .btn-danger.active {
   color: #428bca;
   cursor: pointer;
   border-radius: 0;
+  box-shadow: none !important;
 }
 .btn-link,
 .btn-link:active,
@@ -5175,6 +5176,7 @@ button.close {
 .modal-body {
   position: relative;
   padding: 20px;
+  color: black;
 }
 .modal-footer {
   padding: 19px 20px 20px;

@@ -57,14 +57,10 @@ def ver_gastos(request):
     page = request.GET.get('page')
     try:
         gastos = paginator.page(page)
-        print 'try'
     except PageNotAnInteger:
         gastos = paginator.page(1)
-        print 'except 1'
     except EmptyPage:
-        print 'asdasd'
         gastos = paginator.page(paginator.num_pages)
-        print 'except 2'
 
     return render_to_response(
         'Dinero/gastos/ver_gastos.html',
