@@ -9,6 +9,8 @@
             <th>Descripcion</th>
             <th>Producto</th>
             <th>Tarjeta</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
         </tr>
     </thead>
      <tbody>
@@ -35,6 +37,16 @@
                     {% else %}
                         <p>Efectivo</p>
                     {% endif %}
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="eliminar('/dinero/g/borrar/', 'borrar_gasto', '{{e.id}}', false)">
+                        Eliminar
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="modificar('/dinero/g/modificar/', 'modificar_gasto', '{{e.id}}', false)">
+                        Modificar
+                    </button>
                 </td>
             </tr>
         {% endfor %}

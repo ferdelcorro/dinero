@@ -1,0 +1,43 @@
+{% extends 'modal_base.html' %}
+
+{% block title %}Borrar Gasto{% endblock %}
+
+{% block modal_id %}borrar_gasto{% endblock %}
+
+{% block body %}
+
+    <div class="row row-eq-height">
+        <div class="col-sm-4 pull-left" style="background-color: #efefef; padding: 0px; height: 100%">
+            <div class="row-fluid" style="padding: 10px">
+                <img src="/static/img/new_project.png" style="width: 100%;">
+            </div>
+        </div>
+        <div class="col-sm-8" style="padding-top: 10px">
+            <form id="form" action="." class="form" method="post">
+                {% csrf_token %}
+                Fecha: {{gasto.fecha}}
+                <br>
+                Monto: ${{gasto.monto}}
+                <br>
+                {% if gasto.producto %}
+                    Producto: {{ gasto.producto }}
+                    <br>
+                {% endif %}
+                {% if gasto.tarjeta %}
+                    Producto: {{ gasto.tarjeta }}
+                    <br>
+                {% endif %}
+                <input type="hidden" name="fecha" value="{{gasto.fecha}}" id="id_fecha">
+                <input type="hidden" name="monto" value="{{gasto.monto}}" id="id_monto">
+                <input type="hidden" name="monto" value="{{gasto.moneda}}" id="id_moneda">
+                <input type="hidden" name="id" value="{{gasto.id}}" id="id">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" onClick="eliminar('/dinero/g/borrar/', 'borrar_gasto', '{{gasto.id}}', true)">Borrar</button>
+{% endblock %}

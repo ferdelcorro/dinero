@@ -5,6 +5,7 @@
         <tr>
             <th>Tarjeta</th>
             <th>Descripción</th>
+            <th>Eliminar</th>
         </tr>
     </thead>
      <tbody>
@@ -17,6 +18,16 @@
                     {% else %}
                         -
                     {% endif %}
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="eliminar('/tarjeta/t/borrar/', 'borrar_tarjeta', '{{e.id}}', false)">
+                        Eliminar
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="modificar('/tarjeta/t/modificar/', 'modificar_tarjeta', '{{e.id}}', false)">
+                        Modificar
+                    </button>
                 </td>
             </tr>
         {% endfor %}

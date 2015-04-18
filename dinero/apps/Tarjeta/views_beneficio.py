@@ -2,13 +2,15 @@
 import operator
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
+
+from apps.funciones.views import json_response
 
 from apps.Tarjeta.models import Beneficio
 
@@ -43,7 +45,7 @@ def ver_beneficios(request):
     user = request.user
     beneficios = Beneficio.objects.all()
 
-    paginator = Paginator(beneficios, 10)
+    paginator = Paginator(beneficios, 5)
     page = request.GET.get('page')
     try:
         beneficios = paginator.page(page)
@@ -75,7 +77,7 @@ def buscar(request):
 
         beneficios = beneficios.filter(Q(qs1) | Q(qs2))
 
-    paginator = Paginator(beneficios, 10)
+    paginator = Paginator(beneficios, 5)
     page = request.GET.get('page')
     try:
         beneficios = paginator.page(page)
@@ -93,3 +95,66 @@ def buscar(request):
             }
         )
     )
+
+
+@login_required
+def borrar(request):
+    response = {}
+    form = BeneficioForm()
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        beneficio = get_object_or_404(Beneficio, pk=pk)
+
+        return render_to_response(
+            'Tarjeta/beneficio/modal/_borrar_beneficio_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'beneficio': beneficio,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    beneficio = get_object_or_404(Beneficio, pk=pk)
+    try:
+        beneficio.delete()
+        response['result'] = 'OK'
+    except:
+        response['result'] = 'ERROR'
+
+    return json_response(response)
+
+
+@login_required
+def modificar(request):
+    response = {}
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        beneficio = get_object_or_404(Beneficio, pk=pk)
+        form = BeneficioForm(instance=beneficio)
+        return render_to_response(
+            'Tarjeta/beneficio/modal/_modificar_beneficio_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'beneficio': beneficio,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    beneficio = get_object_or_404(Beneficio, pk=pk)
+    form = BeneficioForm(data=request.POST, instance=beneficio)
+    if form.is_valid():
+        form.save()
+        response['result'] = 'OK'
+    else:
+            response['result'] = 'ERROR'
+            errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
+            response['errors'] = errors
+    return json_response(response)

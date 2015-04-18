@@ -1,0 +1,38 @@
+{% extends 'modal_base.html' %}
+
+{% block title %}Modificar Tarjeta{% endblock %}
+
+{% block modal_id %}modificar_tarjeta{% endblock %}
+
+{% block body %}
+
+    <div class="row row-eq-height">
+        <div class="col-sm-4 pull-left" style="background-color: #efefef; padding: 0px; height: 100%">
+            <div class="row-fluid" style="padding: 10px">
+                <img src="/static/img/new_project.png" style="width: 100%;">
+            </div>
+        </div>
+        <div class="col-sm-8" style="padding-top: 10px">
+            <form id="form" action="." class="form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>{{ form.nombre.label }}</label>
+                    {{ form.nombre }} 
+                    {{ form.nombre.errors }} 
+                </div>
+                <div class="form-group">
+                    <label>{{ form.descripcion.label }}</label>
+                    {{ form.descripcion }} 
+                    {{ form.descripcion.errors }} 
+                </div>
+                <input type="hidden" name="id" value="{{tarjeta.id}}" id="id">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" onClick="modificar('/tarjeta/t/modificar/', 'modificar_tarjeta', '{{tarjeta.id}}', true)">Modificar</button>
+{% endblock %}

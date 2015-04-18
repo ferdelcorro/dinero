@@ -7,6 +7,7 @@
             <th>Monto</th>
             <th>Moneda</th>
             <th>Eliminar</th>
+            <th>Modificar</th>
         </tr>
     </thead>
      <tbody>
@@ -21,49 +22,19 @@
                     {% endif %}
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-link active" onClick="eliminar('/dinero/s/borrar_sueldo/', 'borrar_sueldo', '{{e.id}}', false)">
+                    <button type="submit" class="btn btn-link active" onClick="eliminar('/dinero/s/borrar/', 'borrar_sueldo', '{{e.id}}', false)">
                         Eliminar
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="modificar('/dinero/s/modificar/', 'modificar_sueldo', '{{e.id}}', false)">
+                        Modificar
                     </button>
                 </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
-
-<script>
-function eliminar(url, tipo, id, confirmed){
-    if(confirmed){
-        var $form = $('#form');
-        var post_data = $form.serialize();
-        post_data['id'] = id
-        $.post(url, post_data, function(response){
-            alert(response)
-            switch (response.result) {
-                case 'ERROR':
-                    alert('Ha ocurrido un error, se refrescará el sitio')
-                case 'OK':
-                    alert('El borrado ha sido exitoso')
-                    $('#modal').hide();
-            }
-        }, 'json');
-        location.reload();
-    }else{
-        $.ajax({
-            type: "GET",
-            url: url,
-            data: {
-                'id': id,
-            },
-            success: function(data){
-                $('#modal').html(data);
-                $('#'+tipo).modal('show');
-            },
-            dataType: 'html'
-        });
-    }
-    
-}
-</script>
 
 {% block paginator %}
     {% paginator sueldos request %}

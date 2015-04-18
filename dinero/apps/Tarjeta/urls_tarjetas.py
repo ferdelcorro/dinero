@@ -5,5 +5,7 @@ urlpatterns = patterns('',
     url(r'^ver_tarjetas/$', 'apps.Tarjeta.views_tarjeta.ver_tarjetas'),
     url(r'^buscar/$', 'apps.Tarjeta.views_tarjeta.buscar'),
 
-    url(r'^cargar_tarjeta_modal/$', 'apps.Tarjeta.views_tarjeta.cargar_tarjeta_modal'),    
+    url(r'^cargar_tarjeta_modal/$', 'apps.Tarjeta.views_tarjeta.cargar_tarjeta_modal'),
+    url(r'^borrar/$', 'apps.Tarjeta.views_tarjeta.borrar'),
+    url(r'^modificar/$', 'apps.Tarjeta.views_tarjeta.modificar'),
 )

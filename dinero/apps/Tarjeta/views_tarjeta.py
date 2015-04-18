@@ -4,13 +4,15 @@ import operator
 from django.http import Http404
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
+
+from apps.funciones.views import json_response
 
 from apps.Tarjeta.models import Tarjeta
 
@@ -28,7 +30,9 @@ def cargar_tarjeta(request):
     if request.method == 'POST':
         form = TarjetaForm(request.POST)
         if form.is_valid():
-            form.save()
+            t = form.save(commit=False)
+            t.user = request.user
+            t.save()
             return render_to_response('base.html',RequestContext(request,{}))
     return render_to_response(
         'Tarjeta/tarjeta/cargar_tarjeta.html',
@@ -51,11 +55,12 @@ def cargar_tarjeta_modal(request):
         form = TarjetaForm(request.POST)
         if form.is_valid():
             try:
-                t = form.save()
+                t = form.save(commit=False)
+                t.user = request.user
+                t.save()
                 response['result'] = 'OK'
                 response['tarjeta_id'] = t.id
                 response['tarjeta_name'] = t.nombre
-                print response
             except:
                 response['result'] = 'ERROR'
                 response['error_type'] = 'OTHER'
@@ -66,8 +71,6 @@ def cargar_tarjeta_modal(request):
             response['error_type'] = 'INVALID'
             response['errors'] = errors
 
-        print response
-        
         return json_response(response)
     else:
         raise Http404
@@ -76,9 +79,9 @@ def cargar_tarjeta_modal(request):
 @login_required
 def ver_tarjetas(request):
     user = request.user
-    tarjetas = Tarjeta.objects.all()
+    tarjetas = Tarjeta.objects.filter(user=request.user).order_by('nombre')
 
-    paginator = Paginator(tarjetas, 10)
+    paginator = Paginator(tarjetas, 5)
     page = request.GET.get('page')
     try:
         tarjetas = paginator.page(page)
@@ -101,7 +104,7 @@ def ver_tarjetas(request):
 @login_required
 def buscar(request):
     term = request.GET.get('term', None)
-    tarjetas = Tarjeta.objects.all()
+    tarjetas = Tarjeta.objects.filter(user=request.user).order_by('nombre')
 
     if term:
         terms = term.split(' ')
@@ -110,7 +113,7 @@ def buscar(request):
 
         tarjetas = tarjetas.filter(Q(qs1) | Q(qs2))
 
-    paginator = Paginator(tarjetas, 10)
+    paginator = Paginator(tarjetas, 5)
     page = request.GET.get('page')
     try:
         tarjetas = paginator.page(page)
@@ -128,3 +131,66 @@ def buscar(request):
             }
         )
     )
+
+
+@login_required
+def borrar(request):
+    response = {}
+    form = TarjetaForm()
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        tarjeta = get_object_or_404(Tarjeta, pk=pk, user=request.user)
+
+        return render_to_response(
+            'Tarjeta/tarjeta/modal/_borrar_tarjeta_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'tarjeta': tarjeta,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    tarjeta = get_object_or_404(Tarjeta, pk=pk, user=request.user)
+    try:
+        tarjeta.delete()
+        response['result'] = 'OK'
+    except:
+        response['result'] = 'ERROR'
+
+    return json_response(response)
+
+
+@login_required
+def modificar(request):
+    response = {}
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        tarjeta = get_object_or_404(Tarjeta, pk=pk, user=request.user)
+        form = TarjetaForm(instance=tarjeta)
+        return render_to_response(
+            'Tarjeta/tarjeta/modal/_modificar_tarjeta_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'tarjeta': tarjeta,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    tarjeta = get_object_or_404(Tarjeta, pk=pk, user=request.user)
+    form = TarjetaForm(data=request.POST, instance=tarjeta)
+    if form.is_valid():
+        form.save()
+        response['result'] = 'OK'
+    else:
+            response['result'] = 'ERROR'
+            errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
+            response['errors'] = errors
+    return json_response(response)

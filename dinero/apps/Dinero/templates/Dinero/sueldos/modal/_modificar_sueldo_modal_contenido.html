@@ -1,0 +1,43 @@
+{% extends 'modal_base.html' %}
+
+{% block title %}Modificar Sueldo{% endblock %}
+
+{% block modal_id %}modificar_sueldo{% endblock %}
+
+{% block body %}
+
+    <div class="row row-eq-height">
+        <div class="col-sm-4 pull-left" style="background-color: #efefef; padding: 0px; height: 100%">
+            <div class="row-fluid" style="padding: 10px">
+                <img src="/static/img/new_project.png" style="width: 100%;">
+            </div>
+        </div>
+        <div class="col-sm-8" style="padding-top: 10px">
+            <form id="form" action="." class="form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>{{ form.monto.label }}</label>
+                    {{ form.monto }} 
+                    {{ form.monto.errors }} 
+                </div>
+                <div class="form-group">
+                    <label>{{ form.fecha.label }}</label>
+                    {{ form.fecha }} 
+                    {{ form.fecha.errors }} 
+                </div>
+                <div class="form-group">
+                    <label>{{ form.moneda.label }}</label>
+                    {{ form.moneda }} 
+                    {{ form.moneda.errors }} 
+                </div>
+                <input type="hidden" name="id" value="{{sueldo.id}}" id="id">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" onClick="modificar('/dinero/s/modificar/', 'modificar_sueldo', '{{sueldo.id}}', true)">Modificar</button>
+{% endblock %}

@@ -7,6 +7,8 @@
             <th>Monto</th>
             <th>Días</th>
             <th>Descripción</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
         </tr>
     </thead>
      <tbody>
@@ -20,6 +22,16 @@
                     {% endfor %}
                 </td>
                 <td>{{e.descripcion}}</td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="eliminar('/tarjeta/b/borrar/', 'borrar_beneficio', '{{e.id}}', false)">
+                        Eliminar
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="modificar('/tarjeta/b/modificar/', 'modificar_beneficio', '{{e.id}}', false)">
+                        Modificar
+                    </button>
+                </td>
             </tr>
         {% endfor %}
     </tbody>

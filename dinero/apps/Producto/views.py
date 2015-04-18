@@ -2,13 +2,15 @@
 import operator
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
+
+from apps.funciones.views import json_response
 
 from apps.Producto.models import Producto
 
@@ -51,7 +53,9 @@ def cargar_producto_modal(request):
         form = ProductoForm(request.POST)
         if form.is_valid():
             try:
-                p = form.save()
+                p = form.save(commit=False)
+                p.user = request.user
+                p.save()
                 response['result'] = 'OK'
                 response['producto_id'] = p.id
                 response['producto_name'] = p.nombre
@@ -74,9 +78,9 @@ def cargar_producto_modal(request):
 @login_required
 def ver_productos(request):
     user = request.user
-    productos = Producto.objects.all()
+    productos = Producto.objects.filter(user=request.user).order_by('nombre')
 
-    paginator = Paginator(productos, 10)
+    paginator = Paginator(productos, 5)
     page = request.GET.get('page')
     try:
         productos = paginator.page(page)
@@ -99,17 +103,16 @@ def ver_productos(request):
 @login_required
 def buscar(request):
     term = request.GET.get('term', None)
+    productos = Producto.objects.filter(user=request.user).order_by('nombre')
 
     if term:
         terms = term.split(' ')
         qs1 = reduce(operator.or_, (Q(nombre__icontains=n) for n in terms))
         qs2 = reduce(operator.or_, (Q(descripcion__icontains=n) for n in terms))
 
-        productos = Producto.objects.all()
-
         productos = productos.filter(Q(qs1) | Q(qs2))
 
-        paginator = Paginator(productos, 10)
+        paginator = Paginator(productos, 5)
         page = request.GET.get('page')
         try:
             productos = paginator.page(page)
@@ -127,3 +130,66 @@ def buscar(request):
             }
         )
     )
+
+
+@login_required
+def borrar(request):
+    response = {}
+    form = ProductoForm()
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        producto = get_object_or_404(Producto, pk=pk, user=request.user)
+
+        return render_to_response(
+            'Producto/modal/_borrar_producto_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'producto': producto,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    producto = get_object_or_404(Producto, pk=pk, user=request.user)
+    try:
+        producto.delete()
+        response['result'] = 'OK'
+    except:
+        response['result'] = 'ERROR'
+
+    return json_response(response)
+
+
+@login_required
+def modificar(request):
+    response = {}
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        producto = get_object_or_404(Producto, pk=pk, user=request.user)
+        form = ProductoForm(instance=producto)
+        return render_to_response(
+            'Producto/modal/_modificar_producto_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'producto': producto,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    producto = get_object_or_404(Producto, pk=pk, user=request.user)
+    form = ProductoForm(data=request.POST, instance=producto)
+    if form.is_valid():
+        form.save()
+        response['result'] = 'OK'
+    else:
+        response['result'] = 'ERROR'
+        errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
+        response['errors'] = errors
+    return json_response(response)

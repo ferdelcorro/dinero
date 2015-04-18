@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+from datetime import date, datetime, timedelta
+
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
+
+from apps.funciones.views import json_response
 
 from apps.Dinero.models import Sueldo, Gasto
 
@@ -11,7 +15,7 @@ from apps.Dinero.forms import SueldoForm, GastoForm
 from apps.Tarjeta.forms import TarjetaForm
 from apps.Producto.forms import ProductoForm
 
-from datetime import date, datetime, timedelta
+
 
 
 #Gastos
@@ -53,7 +57,7 @@ def ver_gastos(request):
             ).order_by('-fecha')
 
     #paginator = Paginator(gastos, nro_row)
-    paginator = Paginator(gastos, 10)
+    paginator = Paginator(gastos, 5)
     page = request.GET.get('page')
     try:
         gastos = paginator.page(page)
@@ -91,7 +95,7 @@ def gastos_tabla(request):
         gastos = gastos.filter(fecha__year=dt.year)
     
     #paginator = Paginator(gastos, nro_row)
-    paginator = Paginator(gastos, 10)
+    paginator = Paginator(gastos, 5)
     page = request.GET.get('page')
     try:
         gastos = paginator.page(page)
@@ -110,4 +114,65 @@ def gastos_tabla(request):
             }
         )
     )
-    
+
+
+@login_required
+def borrar(request):
+    response = {}
+    form = GastoForm()
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        gasto = get_object_or_404(Gasto, pk=pk, user=request.user)
+        return render_to_response(
+            'Dinero/gastos/modal/_borrar_gasto_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'gasto': gasto,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    gasto = get_object_or_404(Gasto, pk=pk, user=request.user)
+    try:
+        gasto.delete()
+        response['result'] = 'OK'
+    except:
+        response['result'] = 'ERROR'
+
+    return json_response(response)
+
+
+@login_required
+def modificar(request):
+    response = {}
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        gasto = get_object_or_404(Gasto, pk=pk, user=request.user)
+        form = GastoForm(instance=gasto)
+        return render_to_response(
+            'Dinero/gastos/modal/_modificar_gasto_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'gasto': gasto,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    gasto = get_object_or_404(Gasto, pk=pk, user=request.user)
+    form = GastoForm(data=request.POST, instance=gasto)
+    if form.is_valid():
+        form.save()
+        response['result'] = 'OK'
+    else:
+        response['result'] = 'ERROR'
+        errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
+        response['errors'] = errors
+    return json_response(response)

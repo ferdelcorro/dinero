@@ -241,7 +241,7 @@
 	}
 
 	function validate_errors(name_form, json_errors){
-	    $('#'+name_form).find('.has-error').removeClass('has-error');
+	    //$('#'+name_form).find('.has-error').removeClass('has-error');
 	    for (var key in json_errors) {
 	    	//$('#'+name_form).find('#id_'+key).parent().addClass('has-error')
 	    	$('#'+name_form).find('#id_'+key).addClass('has-error')
@@ -250,6 +250,72 @@
 		    })
 	    }
 	  	//$($('.has-error')[0]).children().putCursor()
+	}
+
+	function eliminar(url, tipo, id, confirmed){
+	    if(confirmed){
+	        var $form = $('#form');
+	        var post_data = $form.serialize();
+	        post_data['id'] = id
+	        $.post(url, post_data, function(response){
+	        	alert(response.result)
+	        	$('#borrar_modal').hide();
+	            switch (response.result) {
+	                case 'ERROR':
+	                    alert('Ha ocurrido un error, refresque e intente nuevamente')
+	                    break
+	                case 'OK':
+	                	location.reload();
+	            }
+	        }, 'json');
+	    }else{
+	        $.ajax({
+	            type: "GET",
+	            url: url,
+	            data: {
+	                'id': id,
+	            },
+	            success: function(data){
+	                $('#borrar_modal').html(data);
+	                $('#'+tipo).modal('show');
+	            },
+	            dataType: 'html'
+	        });
+	    }
+	    
+	}
+
+	function modificar(url, tipo, id, confirmed){
+	    if(confirmed){
+	        var $form = $('#form');
+	        var post_data = $form.serialize();
+	        post_data['id'] = id
+	        $.post(url, post_data, function(response){
+	            switch (response.result) {
+	                case 'ERROR':
+	                    validate_errors('form', response.errors);
+	                    break
+	                case 'OK':
+	                	$('#modificar_modal').hide();
+	                	location.reload();
+	            }
+	        }, 'json');
+	    }else{
+	        $.ajax({
+	            type: "GET",
+	            url: url,
+	            data: {
+	                'id': id,
+	            },
+	            success: function(data){
+	            	alert(data)
+	                $('#modificar_modal').html(data);
+	                $('#'+tipo).modal('show');
+	            },
+	            dataType: 'html'
+	        });
+	    }
+	    
 	}
 
 </script>

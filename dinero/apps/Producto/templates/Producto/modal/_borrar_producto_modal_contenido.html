@@ -1,0 +1,32 @@
+{% extends 'modal_base.html' %}
+
+{% block title %}Borrar Producto{% endblock %}
+
+{% block modal_id %}borrar_producto{% endblock %}
+
+{% block body %}
+
+    <div class="row row-eq-height">
+        <div class="col-sm-4 pull-left" style="background-color: #efefef; padding: 0px; height: 100%">
+            <div class="row-fluid" style="padding: 10px">
+                <img src="/static/img/new_project.png" style="width: 100%;">
+            </div>
+        </div>
+        <div class="col-sm-8" style="padding-top: 10px">
+            <form id="form" action="." class="form" method="post">
+                {% csrf_token %}
+                Nombre: {{producto.nombre}}
+                <br>
+                Descripción: {{producto.descripcion}}
+                <input type="hidden" name="nombre" value="{{producto.nombre}}" id="id_nombre">
+                <input type="hidden" name="id" value="{{producto.id}}" id="id">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" onClick="eliminar('/producto/borrar/', 'borrar_producto', '{{producto.id}}', true)">Borrar</button>
+{% endblock %}

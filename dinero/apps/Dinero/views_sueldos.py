@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
+from datetime import date, datetime, timedelta
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 
+from apps.funciones.views import json_response
+
 from apps.Dinero.models import Sueldo
 
 from apps.Dinero.forms import SueldoForm
-
-from datetime import date, datetime, timedelta
 
 
 #Sueldos
@@ -45,7 +47,7 @@ def ver_sueldos(request):
     dt = date.today()
     sueldos = Sueldo.objects.filter(user=user).order_by('-fecha')
 
-    paginator = Paginator(sueldos, 10)
+    paginator = Paginator(sueldos, 5)
     page = request.GET.get('page')
     try:
         sueldos = paginator.page(page)
@@ -81,7 +83,7 @@ def sueldos_tabla(request):
     elif time == 'year':
         sueldos = sueldos.filter(fecha__year=dt.year)
 
-    paginator = Paginator(sueldos, 10)
+    paginator = Paginator(sueldos, 5)
     page = request.GET.get('page')
     try:
         sueldos = paginator.page(page)
@@ -102,7 +104,8 @@ def sueldos_tabla(request):
     )
 
 
-def borrar_sueldo(request):
+@login_required
+def borrar(request):
     response = {}
     form = SueldoForm()
 
@@ -120,14 +123,44 @@ def borrar_sueldo(request):
             )
         )
 
-    from apps.funciones.views import json_response
     pk = request.POST.get('id', None)
     sueldo = get_object_or_404(Sueldo, pk=pk, user=request.user)
-
     try:
-        sueldos.delete()
+        sueldo.delete()
         response['result'] = 'OK'
     except:
         response['result'] = 'ERROR'
-    print response
     return json_response(response)
+
+
+@login_required
+def modificar(request):
+    response = {}
+
+    if request.method == 'GET':
+        pk = request.GET.get('id', None)
+        sueldo = get_object_or_404(Sueldo, pk=pk, user=request.user)
+        form = SueldoForm(instance=sueldo)
+        return render_to_response(
+            'Dinero/sueldos/modal/_modificar_sueldo_modal_contenido.html',
+            RequestContext(
+                request,
+                {
+                    'sueldo': sueldo,
+                    'form': form,
+                }
+            )
+        )
+
+    pk = request.POST.get('id', None)
+    sueldo = get_object_or_404(Sueldo, pk=pk, user=request.user)
+    form = SueldoForm(data=request.POST, instance=sueldo)
+    if form.is_valid():
+        form.save()
+        response['result'] = 'OK'
+    else:
+            response['result'] = 'ERROR'
+            errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
+            response['errors'] = errors
+    return json_response(response)
+    

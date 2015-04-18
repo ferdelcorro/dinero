@@ -6,4 +6,7 @@ urlpatterns = patterns('',
     url(r'^buscar/$', 'apps.Producto.views.buscar'),
 
     url(r'^cargar_producto_modal/$', 'apps.Producto.views.cargar_producto_modal'),
+
+    url(r'^borrar/$', 'apps.Producto.views.borrar'),
+    url(r'^modificar/$', 'apps.Producto.views.modificar'),
 )

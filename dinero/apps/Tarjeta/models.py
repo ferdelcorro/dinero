@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 
+from django.contrib.auth.models import User
 from apps.Producto.models import Producto
 
 from multiselectfield import MultiSelectField
@@ -23,6 +24,10 @@ class Tarjeta(models.Model):
                     'Descripcion', max_length=800,
                     blank=True, null=True
                 )
+    user = models.ForeignKey(
+                User, related_name='tarjeta_user',
+                blank=True, null=True
+        )
 
     def __unicode__(self):
         return self.nombre

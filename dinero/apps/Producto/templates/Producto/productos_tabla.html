@@ -5,6 +5,8 @@
         <tr>
             <th>Producto</th>
             <th>Descripción</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
         </tr>
     </thead>
      <tbody>
@@ -17,6 +19,16 @@
                     {% else %}
                         -
                     {% endif %}
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="eliminar('/producto/borrar/', 'borrar_producto', '{{e.id}}', false)">
+                        Eliminar
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link active" onClick="modificar('/producto/modificar/', 'modificar_producto', '{{e.id}}', false)">
+                        Modificar
+                    </button>
                 </td>
             </tr>
         {% endfor %}
