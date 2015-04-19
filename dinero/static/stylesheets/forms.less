@@ -1,0 +1,58 @@
+input {
+    border-radius: @border-radius-base !important;
+}
+
+.form {
+	label {
+		font-weight: normal;
+		font-size: 10px;
+	}
+}
+
+.form-frank {
+	.control-label {
+		padding: 5px;
+	}
+
+	.control-data {
+		padding: 7px 5px;
+	}
+
+	.form-group {
+		margin-left: 0;
+		margin-right: 0;
+
+		label {
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			background-color: #ECF1F2;
+			font-weight: normal;
+			text-transform: uppercase;
+			font-size: 0.9em;
+			padding: 7px;
+		}
+		&.pro {
+			label {
+				border: 1px dashed @brand-primary;
+				background-color: #D1DDDF;
+			}
+		}
+
+		&.condensed {
+			margin-bottom: 2px;
+		}
+	}
+
+}
+
+.date-field {
+	width: 100px;
+	float: left;
+}
+
+.search-field {
+	background-image: url("/static/img/icons/icon-search.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-origin: content-box;	
+}

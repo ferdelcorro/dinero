@@ -1,0 +1,4 @@
+.message-1{position:absolute;z-index:1000;left:27%;top:0;width:760px;margin:300px auto 0 auto;padding:50px;background-color:#fff;border:solid 1px #a3a3a3;-moz-box-shadow:0 0 10px 1px rgba(0,0,0,0.3);-webkit-box-shadow:0 0 10px 1px rgba(0,0,0,0.3);box-shadow:0 0 10px 1px rgba(0,0,0,0.3);-ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');}
+.message-1 h1{color:#1899d4}
+.message-1 h2{color:#58595b}
+.circle-lock{width:100px;height:100px;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;background:#1899d4;text-align:center;margin:auto;padding-top:15px;color:#fff}

@@ -1,0 +1,49 @@
+{% extends 'modal_base.html' %}
+
+{% block title %}Beneficio{% endblock %}
+
+{% block modal_id %}ver_beneficio{% endblock %}
+
+{% block body %}
+
+    <div class="row row-eq-height">
+        <div class="col-sm-4 pull-left" style="background-color: #efefef; padding: 0px; height: 100%">
+            <div class="row-fluid" style="padding: 10px">
+                <img src="/static/img/new_project.png" style="width: 100%;">
+            </div>
+        </div>
+        <div class="col-sm-8" style="padding-top: 10px">
+            Monto: {{ beneficio.monto }}%
+            <br>
+            {% if beneficio.descripcion %}
+                Descripción: {{ beneficio.descripcion }}
+                <br>
+            {% endif %}
+            {% if beneficio.tarjeta %}
+                Tarjeta: 
+                    {% for x in beneficio.tarjeta.all %}
+                        {{x}}
+                    {% endfor %}
+                <br>
+            {% endif %}
+            {% if beneficio.producto %}
+                Producto: 
+                    {% for x in beneficio.producto.all %}
+                        {{x}}
+                    {% endfor %}
+                <br>
+            {% endif %}
+            {% if beneficio.dias %}
+                Días: 
+                    {% for x in beneficio.dias.all %}
+                        {{x}}
+                    {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+{% endblock %}

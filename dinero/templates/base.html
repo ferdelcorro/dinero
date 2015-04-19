@@ -8,7 +8,10 @@
 	<link href="/static/css/style.css" rel="stylesheet">
 
 	<!-- LESS -->
+	<link rel="stylesheet" type="text/less" href="/static/stylesheets/base.less">
+	<!--
 	<link href="/static/stylesheets/base.less" rel="stylesheet">
+	-->
   
   <!-- CUSTOM CSS -->
   <!-- Google font api -->
@@ -35,13 +38,12 @@
 ============================================= -->
 {% if user.is_authenticated %}
   <nav class="navbar-default navbar-inverse navbar-fixed-top navbarEffect" role="navigation">
-	<div class="container">
 
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-		  <li class="active">
-		  <a href="/logout/">Log Out</a>
-		  </li>
+			<li class="home">
+				<a href="/">Home</a>
+			</li>
 		  
 			<!-- dropdown -->
 			 <li class="dropdown">
@@ -55,7 +57,7 @@
 				  <li class="divider"></li>
 				  <li><a href="/dinero/ver_balance/">Ver balance</a></li>
 				</ul>
-			  </li><!-- /.dropdown -->
+			  </li>
 			
 
 			<!-- dropdown -->
@@ -65,26 +67,29 @@
 				  <li><a href="/producto/cargar_producto/">Cargar productos</a></li>
 				  <li><a href="/producto/ver_productos/">Ver productos</a></li>
 				</ul>
-			  </li><!-- /.dropdown -->
+			  </li>
 			
 			<!-- dropdown -->
 			 <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tarjetas <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-				  <li><a href="/tarjeta/t/cargar_tarjeta/">Cargar tarjetas</a></li>
-				  <li><a href="/tarjeta/t/ver_tarjetas/">Ver tarjetas</a></li>
-				  <li class="divider"></li>
-				  <li><a href="/tarjeta/b/cargar_beneficio/">Cargar beneficios</a></li>
-				  <li><a href="/tarjeta/b/ver_beneficios/">Ver beneficios</a></li>
-				  <li class="divider"></li>
-				  <li><a href="/tarjeta/tarjetas/">Ver beneficios por tarjeta</a></li>
+					<li><a href="/tarjeta/t/cargar_tarjeta/">Cargar tarjetas</a></li>
+					<li><a href="/tarjeta/t/ver_tarjetas/">Ver tarjetas</a></li>
+					<li class="divider"></li>
+					<li><a href="/tarjeta/b/cargar_beneficio/">Cargar beneficios</a></li>
+					<li><a href="/tarjeta/b/ver_beneficios/">Ver beneficios</a></li>
+					<li class="divider"></li>
+					<li><a href="/tarjeta/tarjetas/">Ver beneficios por tarjeta</a></li>
 				</ul>
-			  </li><!-- /.dropdown -->
+			</li>
+
+			<li class="active">
+				<a href="/logout/">Log Out</a>
+			</li>
+			
 		</ul>
 	  </div>
-	   
-	 </div> <!-- /.container -->                  
-  </nav>  <!-- /.nav -->
+	   	
 {% endif %}
 <!-- /NAV BAR
 ============================================= -->  
@@ -101,11 +106,13 @@
 <!-- /.BG IMAGE (fixed)
 ============================================= -->
 
-<div  class="container">
-  <div class="col-md-12" style="z-index: 5; margin-top: 100px"> 
-	  {% block content%}{% endblock %}
-  </div>
+<div class="col-md-8" style="z-index: 5; padding: 20px">
+	{% block content%}{% endblock %}
 </div>
+<div class="col-md-4" style="z-index: 5; padding: 20px">
+{% block alert_day %}{% endblock %}
+</div>
+
 	
 <!-- GOTO TOP
 ============================================= -->

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block alert_day %}
+	
+	<div id="modal"></div>
+
+	<div class="panel panel-home">
+		<div class="panel-heading">Beneficios para hoy {{date}}</div>
+		<div class="panel-body">
+		    <table class="table table-wid" style="width:100%">
+			    <tr>
+			    	<th class="text-left">Tarjeta</th>
+			        <th class="text-left">%</th>
+			        <th class="text-left">Producto</th>
+			    </tr>
+			    <tbody class="text-left">
+				    {% for e in beneficios %}
+				    	<tr>
+				    		<td >
+				    			<button type="button" class="btn btn-link" onClick="ver_valor('/tarjeta/b/ver/', '{{e.id}}', 'ver_beneficio')">
+				    				{% if e.tarjeta %}
+				    					{% for x in e.tarjeta.all %}
+				    						{{ x.nombre }}
+				    					{% endfor %}
+				    				{% else %}
+				    					-
+				    				{% endif %}
+				    			</button>
+				    		</td>
+				    		<td >
+				    			<button type="button" class="btn btn-link" onClick="ver_valor('/tarjeta/b/ver/', '{{e.id}}', 'ver_beneficio')">
+				    				{{e.monto}}%
+				    			</button>
+				    		</td>
+				    		<td >
+				    			<button type="button" class="btn btn-link" onClick="ver_valor('/tarjeta/b/ver/', '{{e.id}}', 'ver_beneficio')">
+					    			{% if e.producto %}
+					    				{{e.producto}}
+					    			{% else %}
+					    				-
+					    			{% endif %}
+					    		</button>
+				    		</td>
+				    	</tr>
+				    {% endfor %}
+		    	</tbody>
+		    </table>
+		</div>
+	</div>
+
+{% endblock %}

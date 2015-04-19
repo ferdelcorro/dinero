@@ -183,3 +183,15 @@ function beneficio_select(beneficio){
         });
 	}
 }
+
+function ver_valor(url, pk, modal){
+    $.ajax({
+        type: "GET",
+        url: url+pk+'/',
+        success: function(data){
+            $('#modal').html(data);
+            $('#'+modal).modal('show');
+        },
+        dataType: 'html'
+    });
+}

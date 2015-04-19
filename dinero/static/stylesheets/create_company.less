@@ -1,0 +1,243 @@
+@import "base.less";
+
+.wizard-container {
+	box-shadow: 1px 1px 6px #777;
+	padding: 20px 10px;
+	border-radius: 4px;
+	margin-bottom: 30px;
+	min-height: 400px;
+
+	background: rgb(237,237,237); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(237,237,237,1) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(237,237,237,1) 0%,rgba(255,255,255,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+	.col-help {
+		border-left: 1px solid #ddd;
+
+		ul.steps {
+			@border: 1px solid #ddd;
+			list-style: none;
+			padding-left: 0;
+			font-size: 13px;
+			border-top: @border;
+
+			li {
+				padding: 10px 0;
+				border-bottom:@border;
+				&.active {
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+.step {
+
+	.number {
+		float: left;
+		background-color: #FFF;
+		height: 35px; 
+		width: 35px; 
+		margin: 10px;
+		padding: 2px;
+		border-radius: 31px;
+		padding-left: 10px;
+		font-size: 24px;
+	}
+
+	.text {
+		float: right;
+		width: 75%;
+		font-size: 20px;
+		line-height: 18px;
+		margin-top: 10px;
+	}
+
+	&.current {
+		.text {color: #fff;}	
+	}
+
+}
+
+
+/* BUTTONS --------------------- */
+.btn-scope {
+	background-color: #1897D2 !important;
+	border-radius: 5px !important;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 6px;
+	width: 119px;
+	min-height: 45px;
+
+	.input-group-addon {
+		padding: 5px;
+	}
+}
+
+.btn-next {
+	background-color: #1897D2 !important;
+	border-radius: 50px !important;
+	font-size: 18px;
+
+	&.disabled {
+		background: none !important;
+		color: #555;
+	}
+}
+
+
+.color-box {
+    float:left;
+    width:70px;
+    height:70px;
+    margin-left:0px;
+    margin-right:10px;
+    margin-bottom:0px;
+    border: 1px solid white;
+}
+
+.change_pict_label {
+    position: fixed;
+    background-color: gray;
+    width: 276px;
+    text-align: center;
+    padding: 6px;
+    opacity: 0.7;
+    z-index: 99999;
+    display: none;
+
+    &:hover {
+	    background-color: gray;
+	    display: block;
+	}
+
+	h2{
+	    color: white;
+	    font-weight: bold;
+	}
+}
+
+.pick_logo{
+    position: fixed;
+    width: 278px;
+    height: 277px;
+    opacity: 0;
+}
+.ms-container{
+    //width: 505px !important;
+    width: 100% !important;
+}    
+
+.fa-help {
+	color: #ccc;
+	float: right;
+}
+
+.table-scope tr td {padding: 0 4px 10px;}
+
+
+/* PRICING */
+.plan-selected {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  
+  -moz-box-shadow: 1px 1px 8px #ccc;
+	-webkit-box-shadow: 1px 1px 8px #ccc;
+	box-shadow: 1px 1px 8px #ccc;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#cccccc')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#cccccc');	
+}
+
+.planes .col-md-2 {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.flat .plan {
+  border-radius: 6px;
+  list-style: none;
+  padding: 0 0 20px;
+  margin: 0 0 15px;
+  background: #fff;
+  text-align: center;
+}
+
+.flat .plan li {
+  padding: 10px 15px;
+  color: #333333;
+  border-top: 1px solid #f5f5f5;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+.flat .plan li.plan-price {
+  border-top: 0;
+}
+.flat .plan li.plan-name {
+  border-radius: 6px 6px 0 0;
+  padding: 15px 0;
+  font-size: 14px;
+  line-height: 20px;
+  min-height: 70px;
+  color: #fff;
+  background: #1DA7DC;  /* color todos */
+  margin-bottom: 30px;
+  border-top: 0;
+}
+
+.flat .plan li > strong {
+  color: #1DA7DC;  /* color todos  */
+}
+
+.flat .plan li.plan-action {
+  margin-top: 10px;
+  border-top: 0;
+}
+
+.flat .plan:hover {
+	.plan-selected();
+}
+
+.flat .plan.featured li.plan-name {
+  background: #60AB22;  /* color principal  */
+}
+.flat .plan.featured:hover li.plan-name {
+  background: #518E1C;  /* color principal hover */
+}
+.flat .plan:hover li.plan-name {
+  background: #1A8FBA;  /* color todos  hover */
+}
+.flat .plan li.plan-price > strong {
+  font-size: 33px;  /* price font size */
+}
+
+.try .flat .plan {
+  	border: 1px solid #ddd;
+
+	li.plan-name {
+	  background: #AAA;
+	  margin-bottom: 20px;
+	}
+
+	&.selected {
+		.plan-selected();
+
+		li.plan-name {
+  			background: #1A8FBA;  /* color todos  hover */
+		}
+	}
+
+	.btn-primary {
+		background: transparent;
+		color: #1588bd;
+	}
+
+}
+

@@ -158,3 +158,18 @@ def modificar(request):
             errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
             response['errors'] = errors
     return json_response(response)
+
+
+@login_required
+def ver(request, beneficio_id):
+    beneficio = get_object_or_404(Beneficio, pk=beneficio_id)
+
+    return render_to_response(
+        'Tarjeta/beneficio/modal/_beneficio_modal.html',
+        RequestContext(
+            request,
+            {
+                'beneficio': beneficio,
+            }
+        )
+    )

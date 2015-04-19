@@ -1,0 +1,295 @@
+// NAVBARS 
+
+
+//- MAIN NAVBAR -------------------------------------------------------
+.navbar{
+    margin-bottom: 0 !important;
+    min-height: 30px !important;
+}
+
+.navbar-small{
+    height: 30px !important;
+}
+
+.navbar-brand-small{
+   padding-top: 5px !important;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    color: @navbar-default-color;
+}
+
+.navbar-pic {
+    height: @navbar-height;
+    width: @navbar-height;
+    //border-radius: 100px;
+    margin-top: -10px;
+    background-color: @body-bg;
+}
+
+.menu-cia-logo{
+    .navbar-pic();
+    margin-top: 12px !important;
+    margin-right: 10px !important;
+    margin-left: 3px;
+}
+
+.cia-title-1{
+    color: @body-bg !important;
+    margin-left: 5px;
+    margin-top: 22px;
+    font-size: 15px;
+}
+
+.navbar-pic-small{
+    height: 30px !important;
+    width: 30px !important;
+    margin-top: -5px !important;
+    background-color: transparent;
+    margin-left: 3px;
+}
+
+.navbar-icon{
+    .navbar-brand();
+    cursor: pointer;
+    color: @body-bg !important;
+}
+
+.navbar-icon-small{
+    padding-top: 5px !important;
+}
+
+.navbar-user{
+    .navbar-brand();
+    font-size: 16px;
+    padding-top: 7px;
+    text-align: left;
+    color: @body-bg !important;
+    min-width: 100px;
+    > .user-rol{
+        font-size: 10px;
+        margin-top: -3px;
+    }
+}
+
+.navbar-user-small{
+    padding-top: 4px !important;
+}
+
+.navbar .vertical-divider {
+    border-left: 1px solid #444;
+    margin: 0 10px;
+    height: @navbar-height;
+}
+
+.navbar-small {
+    height: @navbar-small-height;
+
+    .vertical-divider {
+        height: @navbar-small-height;
+    }
+}
+
+.nav .menu-btn{
+    font-size: 25px !important;
+}
+
+.nav .menu-btn-small{
+    font-size: 20px !important;
+    height: 30px;   
+}
+
+.nav .fa{
+    line-height: 0.5 !important;
+}
+
+.user-photo {
+    margin-left: 0 !important;
+    padding: 10px 10px 0 10px;
+    .navbar-pic, .navbar-pic-small {
+        border-radius: 0;
+    }
+}
+
+// Navbar ICONS
+.nav-bar-quick-icons {
+    .navbar-icon;
+    .nav .menu-btn;
+    //padding-right: 4px;
+    //padding-left: 4px;
+    a {
+        padding: 0 !important;
+        &:hover {
+            background-color: transparent !important;
+
+            .navbar-pic {
+                opacity: 1;
+            }
+        }
+    }
+
+    .navbar-pic {
+        height: 30px;
+        width: 30px;
+        border-radius: 100px;
+        margin-top: -7px;
+        opacity: 0.7;
+    }
+
+    .navbar-pic-small {
+        height: 25px !important;
+        width: 25px !important;
+    }
+}
+
+.notification-icon {
+    opacity: 1;
+    background-color: red;
+}
+
+.notification-icon {
+    opacity: 1;
+    background-color: red;
+}
+
+.ntf-icons{
+    position: fixed !important;
+    color: rgb(88, 88, 88) !important;
+    margin-top: -18px !important;
+    font-size: 23px !important;
+    margin-left: 7px !important;
+}
+
+.input-search {
+    &:extend(.form-control);
+    background-image: url("/img/icons/icon-search.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    //padding: 50px 20px 0 20px;
+}
+
+
+
+
+//- SUBMODULES NAVBAR -------------------------------------------------
+.secundar-navbar{
+    z-index: 1010;
+    height: @secundar-navbar-height;
+    background-color: #eceded;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,.1);
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,.1);
+    border-bottom: 1px solid #ccc;
+    margin-left: inherit;
+    margin-right: inherit;
+
+    .btn-default {
+        background-color: #eceded;
+        a {color: inherit;}
+        a:hover {text-decoration: none;}
+    }
+
+    a.btn-default:hover {
+        text-decoration: none;
+        border-bottom: 2px solid @brand-custom-primary;
+    }
+
+    .btn {
+        height: @secundar-navbar-height;
+        padding: 5px 10px;
+        border: none;
+    }
+
+    .btn.active {
+        background-color: @gray-submenu-active !important;
+        border-bottom: 2px solid @brand-custom-primary;
+    }
+}
+
+
+.sec-navbar-margins(@top){
+    top: @top;
+}
+
+.content-navbar{
+    .sec-navbar-margins(@navbar-height);
+    //background-color: @primary-color-light;
+    background-color: #292a2f;
+    > .object-title{
+        padding-left: 29px !important;
+        padding-right: 13px !important;
+    }
+}
+
+.content-navbar-small{
+    .sec-navbar-margins(30px);
+    > .object-title{
+        padding-left: 29px !important;
+        padding-right: 13px !important;
+    }
+}
+
+
+
+//- SECTIONS NAVBAR ----------------------------------------
+.third-navbar {
+    z-index: 1010!important;
+    top: @navbar-height + @secundar-navbar-height + 2;
+    background-color: #fff;
+    padding: 10px 0;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+
+    i {
+        padding: 5px;
+        color: @gray-light;
+    }
+    .shortcut{
+        font-size: 18px;
+    }
+}
+
+.third-navbar.content-navbar-small {
+    //top: @navbar-small-height + @secundar-navbar-height + 1;
+    top: @navbar-small-height;
+}
+
+.third-navbar.content-navbar-small {
+    //top: @navbar-small-height + @secundar-navbar-height + 1;
+    top: @navbar-small-height;
+}
+
+
+.fourth-navbar {
+    z-index: 1041;
+    height: @fourth-navbar-height;
+    background-color: @gray-submenu-active;
+    margin-bottom: -10px;
+    margin-top: 10px;
+
+    .btn, .btn-default {
+        color: #fff;
+        background-color: transparent !important;
+        height: @fourth-navbar-height;
+        padding: 7px 20px 1px 20px;
+        border: none;
+        font-size: 1em;
+        font-weight: 300;
+    }
+    .btn.active {
+        background-color: transparent !important;
+        background-image: url('/img/dropdown-white.png');
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        border-bottom: 3px solid @brand-custom-primary;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .btn:hover, .btn.active:hover {
+        border-bottom: 3px solid @brand-custom-primary;
+        background-color: transparent !important;
+    }
+
+}
+
+

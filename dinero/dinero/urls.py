@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'dinero.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^$', 'apps.Persona.views.home', name='home'),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout',
         {'next_page': '/'}
@@ -12,7 +13,6 @@ urlpatterns = patterns('',
     url(r'^signup/$', 'apps.Persona.views.sign_up'),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'apps.Persona.views.home', name='home'),
 
     url(
         r'^dinero/',

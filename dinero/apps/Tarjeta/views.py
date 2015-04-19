@@ -35,7 +35,6 @@ def tarjetas(request):
 def tarjeta_selected(request, tarjeta_id):
     t = get_object_or_404(Tarjeta, pk=tarjeta_id, user=request.user)
     beneficios = Beneficio.objects.filter(tarjeta=t)
-    print beneficios
     return render_to_response(
         'Tarjeta/tarjeta_beneficios/_beneficios_contenido.html',
         RequestContext(
