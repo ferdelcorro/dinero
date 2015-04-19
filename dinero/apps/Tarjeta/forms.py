@@ -35,4 +35,8 @@ class BeneficioForm(ModelForm):
                 'class': 'form-control',
                 'style': 'display: inline; width: 20%'}
                 ),
+            'monto': forms.TextInput(attrs={
+                'class': 'form-control',
+                'style': 'display: inline; width: 20%'}
+                ),
         }

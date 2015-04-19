@@ -1,0 +1,123 @@
+// TABLES ------------
+
+.table {
+    border-bottom: 1px solid #ccc;
+}
+
+.table > thead > tr > th {
+    padding-bottom: 14px;
+    border-right: 1px solid #ccc;
+}
+
+.table > thead > tr > th:last-child,
+.table > tbody > tr > td:last-child 
+{
+    border-right: none;
+    padding-right: (@grid-gutter-width / 2);
+}
+
+.table > thead > tr > th:first-child,
+.table > tbody > tr > td:first-child,
+{
+    padding-left: (@grid-gutter-width / 2);
+}
+
+
+td {
+    padding: 10px 8px;
+}
+
+table .btn-default.dropdown-toggle {
+    padding: 2px 6px;
+}
+
+table th .dropdown-toggle {
+    padding: 8px;
+}
+
+table {
+    &.table-condensed {
+        > tr > td {
+            padding: 1px 4px !important;
+        }
+    }
+}
+
+.sortoptions {
+    display: block;
+    padding: 1px 0;
+    float: right;
+    text-align: right;
+}
+
+.sortoptions a {
+    width: 14px;
+    height: 12px;
+    display: inline-block;
+}
+
+.sortoptions a.descending {
+    background: url(/img/icons/sorting-icons.gif) -5px -75px no-repeat;
+}
+
+.sortoptions a.ascending {
+    background: url(/img/icons/sorting-icons.gif) -5px -53px no-repeat;
+}
+
+.sortoptions a.sortremove {
+background: url(/img/icons/sorting-icons.gif) -4px -5px no-repeat;
+}
+
+.sortoptions a.nosort {
+background: url(/img/icons/sorting-icons.gif) -5px -90px no-repeat;
+}
+
+th:hover .sortoptions a.clearsort {
+    background: url(/img/icons/sorting-icons.gif) -5px -27px no-repeat;
+}
+.sortoptions a.clearsort {
+    background: none;
+}
+
+.table-sorted th {
+    border-left: 1px solid #ccc;
+}
+
+.table-sorted tr:hover > th {
+    background-color: inherit !important;
+}
+
+
+// TABLAS SIN PADDING LATERAL
+table.no-pad tr td:first-child {
+    padding-left: 0;
+}
+table.no-pad tr td:last-child {
+    padding-right: 0;
+}    
+
+
+table .table-extra-condensed {
+    tr td {
+        padding: 0px 2px;
+    }
+}
+
+.paginator {
+    //border-top: 1px solid #ccc;
+}
+
+
+// TREE VIEWS --------------------
+@depth-pad: 25px;
+
+.data-depth-0 {padding-left: 0;}
+.data-depth-1 {padding-left: @depth-pad * 1 !important;}
+.data-depth-2 {padding-left: @depth-pad * 2 !important;}
+.data-depth-3 {padding-left: @depth-pad * 3 !important;}
+.data-depth-4 {padding-left: @depth-pad * 4 !important;}
+.data-depth-5 {padding-left: @depth-pad * 5 !important;}
+.data-depth-6 {padding-left: @depth-pad * 6 !important;}
+.data-depth-7 {padding-left: @depth-pad * 7 !important;}
+.data-depth-8 {padding-left: @depth-pad * 8 !important;}
+.data-depth-9 {padding-left: @depth-pad * 9 !important;}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<div id="modal"></div>
+
+	<div class="row-fluid">
+		<div class="col-md-6">
+			Tarjetas:
+			<select id="tarjetas" onchange="tarjeta_select(this);">
+				<option value="">------</option>
+				{% for e in tarjetas %}
+					<option value="{{e.id}}">{{e.nombre}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="col-md-6">
+			Beneficios: 
+			<select id="beneficios" onchange="beneficio_select(this);">
+				<option value="">------</option>
+			</select>
+		</div>
+	</div>
+
+{% endblock %}

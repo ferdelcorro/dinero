@@ -40,8 +40,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #APPS INSTALLED
     'bootstrap3',
-    'multiselectfield',
-    'endless_pagination',
+    'static_precompiler',
+    #'multiselectfield',
+    #'endless_pagination',
     #MY APPS
     'apps.Persona',
     'apps.Tarjeta',
@@ -112,6 +113,8 @@ TEMPLATE_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+
+STATIC_PRECOMPILER_ROOT = '/static/stylesheets/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from apps.Producto.models import Producto
 
-from multiselectfield import MultiSelectField
+#from multiselectfield import MultiSelectField
 
 
 DIA = (
@@ -21,13 +21,13 @@ DIA = (
 class Tarjeta(models.Model):
     nombre = models.CharField('Nombre de la tarjeta', max_length=30)
     descripcion = models.TextField(
-                    'Descripcion', max_length=800,
-                    blank=True, null=True
-                )
+        'Descripcion', max_length=800,
+        blank=True, null=True
+    )
     user = models.ForeignKey(
-                User, related_name='tarjeta_user',
-                blank=True, null=True
-        )
+        User, related_name='tarjeta_user',
+        blank=True, null=True
+    )
 
     def __unicode__(self):
         return self.nombre
@@ -45,20 +45,20 @@ class Dia(models.Model):
 
 class Beneficio(models.Model):
     descripcion = models.TextField(
-                    'Descripcion', max_length=800,
-                    blank=True, null=True
-                )
+        'Descripcion', max_length=800,
+        blank=True, null=True
+    )
     monto = models.IntegerField('Porcentaje')
-    
+
     producto = models.ForeignKey(
-                    Producto, related_name='beneficio_producto',
-                    blank=True, null=True
-                )
+        Producto, related_name='beneficio_producto',
+        blank=True, null=True
+    )
     dias = models.ManyToManyField(Dia, blank=True, null=True)
     tarjeta = models.ManyToManyField(
-                Tarjeta, related_name='tarjeta_producto',
-                blank=True, null=True
-            )
+        Tarjeta, related_name='tarjeta_producto',
+        blank=True, null=True
+    )
 
     def __unicode__(self):
         return u"%s %s" % (self.producto, self.monto)
@@ -73,5 +73,3 @@ class Tarjeta_Beneficios(models.Model):
     def __unicode__(self):
         return u"%s %s" % (self.tarjeta, self.beneficio)
 """
-
-    

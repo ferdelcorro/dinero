@@ -30,17 +30,21 @@
                     {{ form.producto }} 
                     {{ form.producto.errors }} 
                 </div>
-                <div class="form-group">
-                    <label>{{ form.dias.label }}</label>
-                    <br>
-                    {{ form.dias }} 
-                    {{ form.dias.errors }} 
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{ form.dias.label }}</label>
+                        <br>
+                        {{ form.dias }} 
+                        {{ form.dias.errors }}    
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>{{ form.tarjeta.label }}</label>
-                    <br>
-                    {{ form.tarjeta }} 
-                    {{ form.tarjeta.errors }} 
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{ form.tarjeta.label }}</label>
+                        <br>
+                        {{ form.tarjeta }} 
+                        {{ form.tarjeta.errors }} 
+                    </div>
                 </div>
                 <input type="hidden" name="id" value="{{beneficio.id}}" id="id">
             </form>

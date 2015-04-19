@@ -4,7 +4,9 @@ import operator
 from django.http import Http404
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
+from django.shortcuts import (
+    render_to_response, HttpResponse, get_object_or_404
+)
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -33,7 +35,9 @@ def cargar_tarjeta(request):
             t = form.save(commit=False)
             t.user = request.user
             t.save()
-            return render_to_response('base.html',RequestContext(request,{}))
+            return render_to_response(
+                'base.html', RequestContext(request, {})
+            )
     return render_to_response(
         'Tarjeta/tarjeta/cargar_tarjeta.html',
         RequestContext(
@@ -64,7 +68,7 @@ def cargar_tarjeta_modal(request):
             except:
                 response['result'] = 'ERROR'
                 response['error_type'] = 'OTHER'
-            
+
         else:
             errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
             response['result'] = 'ERROR'
@@ -108,8 +112,12 @@ def buscar(request):
 
     if term:
         terms = term.split(' ')
-        qs1 = reduce(operator.or_, (Q(nombre__icontains=n) for n in terms))
-        qs2 = reduce(operator.or_, (Q(descripcion__icontains=n) for n in terms))
+        qs1 = reduce(operator.or_, (
+            Q(nombre__icontains=n) for n in terms)
+        )
+        qs2 = reduce(operator.or_, (
+            Q(descripcion__icontains=n) for n in terms)
+        )
 
         tarjetas = tarjetas.filter(Q(qs1) | Q(qs2))
 
@@ -161,36 +169,4 @@ def borrar(request):
     except:
         response['result'] = 'ERROR'
 
-    return json_response(response)
-
-
-@login_required
-def modificar(request):
-    response = {}
-
-    if request.method == 'GET':
-        pk = request.GET.get('id', None)
-        tarjeta = get_object_or_404(Tarjeta, pk=pk, user=request.user)
-        form = TarjetaForm(instance=tarjeta)
-        return render_to_response(
-            'Tarjeta/tarjeta/modal/_modificar_tarjeta_modal_contenido.html',
-            RequestContext(
-                request,
-                {
-                    'tarjeta': tarjeta,
-                    'form': form,
-                }
-            )
-        )
-
-    pk = request.POST.get('id', None)
-    tarjeta = get_object_or_404(Tarjeta, pk=pk, user=request.user)
-    form = TarjetaForm(data=request.POST, instance=tarjeta)
-    if form.is_valid():
-        form.save()
-        response['result'] = 'OK'
-    else:
-            response['result'] = 'ERROR'
-            errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
-            response['errors'] = errors
     return json_response(response)

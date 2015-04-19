@@ -17,6 +17,12 @@ h1, h2 {font-weight: 300 !important;}
 p { font-size:15px; line-height: 1.6;}
 
 
+#id_descripcion {
+  height: 125px !important;
+  max-height: 125px !important;
+  width: 300px !important;
+  max-width: 300px !important;
+}
 
 
 .jumbotron {color:#FFFFFF;  text-shadow: 0 0.067em #007095;}

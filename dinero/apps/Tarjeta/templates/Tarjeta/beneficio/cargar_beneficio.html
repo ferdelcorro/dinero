@@ -12,6 +12,7 @@
                 </div>
                 <div class="form-group">
                     <label>{{ form.descripcion.label }}</label>
+                    <br>
                     {{ form.descripcion }}
                     {{ form.descripcion.errors }}
                 </div>
@@ -22,12 +23,18 @@
                     Intervalo 0 - 100
                 </div>
                 <div class="form-group">
-                    <label>{{ form.dias.label }}</label>
-                    {{ form.dias }}
-                    {{ form.dias.errors }}
-                    <label>{{ form.tarjeta.label }}</label>
-                    {{ form.tarjeta }}
-                    {{ form.tarjeta.errors }}
+                    <div class="col-md-6">
+                        <label>{{ form.dias.label }}</label>
+                        <br>
+                        {{ form.dias }}
+                        {{ form.dias.errors }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>{{ form.tarjeta.label }}</label>
+                        <br>
+                        {{ form.tarjeta }}
+                        {{ form.tarjeta.errors }}
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">

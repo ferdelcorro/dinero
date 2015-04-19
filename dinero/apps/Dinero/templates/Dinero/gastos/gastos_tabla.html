@@ -5,8 +5,6 @@
         <tr>
             <th>Fecha</th>
             <th>Monto</th>
-            <th>Moneda</th>
-            <th>Descripcion</th>
             <th>Producto</th>
             <th>Tarjeta</th>
             <th>Eliminar</th>
@@ -18,13 +16,6 @@
             <tr>
                 <td>{{e.fecha}}</td>
                 <td>${{e.monto}}</td>
-                <td>{% if e.moneda == 'P' %}
-                        <p>Pesos</p>
-                    {% else %}
-                        <p>Dólares</p>
-                    {% endif %}
-                </td>
-                <td>{{e.descripcion}}</td>
                 <td>
                     {% if e.producto %}
                         {{e.producto}}
