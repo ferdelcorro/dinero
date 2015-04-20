@@ -1,7 +1,39 @@
 {% extends 'base.html' %}
 {% load filters %}
-{% load less %}
 
+{% block alert_day %}
+    <div class="panel panel-home">
+        <div class="panel-heading">Beneficios no aprovechados Producto/Tarjeta</div>
+        <div class="panel-body">
+            <div class="col-md-4">
+                Producto:
+                <br>
+                <select id="productos" onchange="producto_selected(this)">
+                    <option value="">--------</option>
+                    {% for e in productos %}
+                        {% if e %}
+                            <option value="{{e.pk}}">{{e.nombre}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                Tarjeta:
+                <br>
+                <!--
+                <select id="tarjetas" onchange="producto_tarjeta(this)">
+                    <option value="">--------</option>
+                </select>
+                -->
+                <select id="tarjetas">
+                    <option value="">--------</option>
+                </select>
+            </div>
+            <div id="producto_tarjeta" class="col-md-8">
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
     <div class="row">

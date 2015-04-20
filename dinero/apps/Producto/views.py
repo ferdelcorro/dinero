@@ -63,7 +63,7 @@ def cargar_producto_modal(request):
             except:
                 response['result'] = 'ERROR'
                 response['error_type'] = 'OTHER'
-            
+
         else:
             errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
             response['result'] = 'ERROR'

@@ -10,13 +10,13 @@ from django.contrib.auth.decorators import login_required
 from apps.Tarjeta.models import Beneficio
 
 DAYS_WEEK = {
-    0: 'Lunes',
-    1: 'Martes',
-    2: 'Miércoles',
-    3: 'Jueves',
-    4: 'Viernes',
-    5: 'Sábado',
-    6: 'Domingo'
+    0: 'Domingo',
+    1: 'Lunes',
+    2: 'Martes',
+    3: 'Miércoles',
+    4: 'Jueves',
+    5: 'Viernes',
+    6: 'Sábado'
 }
 
 
@@ -35,7 +35,7 @@ def home(request):
             request,
             {
                 'beneficios': b,
-                'date': date.today(),
+                'date': DAYS_WEEK[dt],
             }
         )
     )

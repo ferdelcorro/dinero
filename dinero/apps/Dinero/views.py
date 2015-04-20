@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import date, datetime, timedelta
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -6,14 +8,37 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q, Sum
 
 from apps.Dinero.models import Sueldo, Gasto
+from apps.Tarjeta.models import Beneficio
 
 from apps.Dinero.forms import SueldoForm, GastoForm
-
-from datetime import date, datetime, timedelta
 
 
 #Balances
 ################################################################################
+"""
+def posibles_beneficios(user):
+    from decimal import Decimal
+    gastos = Gasto.objects.filter(
+        user=user, tarjeta__isnull=True, producto__isnull=False
+    )
+    productos = []
+    for e in gastos:
+        if e.producto not in productos:
+            productos.append(e)
+    beneficio = Beneficio.objects.filter(producto__in=productos)
+    ahorro_producto = {}
+    for e in gastos:
+        ahorro_tarjeta = {}
+        b = beneficio.filter(producto=e.producto, tarjeta__isnull=False)
+        for x in beneficio:
+            if x.tarjeta not in ahorro_tarjeta:
+                ahorro_tarjeta[x.tarjeta] = Decimal(e.monto * x.monto) / Decimal(100)
+            else:
+                ahorro_tarjeta[x.tarjeta] += Decimal(e.monto * x.monto) / Decimal(100)
+        if e.producto not in ahorro_producto:
+            ahorro_producto[e.producto] = 
+"""
+
 
 
 @login_required
@@ -21,6 +46,12 @@ def ver_balance(request):
     user = request.user
     gastos = Gasto.objects.filter(user=user)
     sueldos = Sueldo.objects.filter(user=user)
+
+    g = gastos.filter(producto__isnull=False)
+    productos = []
+    for e in gastos:
+        if e.producto not in productos:
+            productos.append(e.producto)
 
     dic = {} #{'fecha': [sueldo, gastos]}
     total_gastos = 0
@@ -49,6 +80,7 @@ def ver_balance(request):
                 'total_sueldos': total_sueldos,
                 'total_gastos': total_gastos,
                 'datos': datos,
+                'productos': productos,
             }
         )
     )
@@ -73,7 +105,9 @@ def filter_balance(request):
 
     if date_from:
         date_from = date_from.split('/')
-        date_from = date(int(date_from[2]), int(date_from[0]), int(date_from[1]))
+        date_from = date(
+            int(date_from[2]), int(date_from[0]), int(date_from[1])
+        )
 
         gastos = gastos.filter(fecha__gte=date_from)
         sueldos = sueldos.filter(fecha__gte=date_from)

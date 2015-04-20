@@ -16,7 +16,8 @@ from django.core.paginator import (
 
 from apps.funciones.views import json_response
 
-from apps.Tarjeta.models import Tarjeta
+from apps.Tarjeta.models import Tarjeta, Beneficio
+from apps.Producto.models import Producto
 
 from apps.Tarjeta.forms import TarjetaForm
 
@@ -170,3 +171,28 @@ def borrar(request):
         response['result'] = 'ERROR'
 
     return json_response(response)
+
+
+@login_required
+def tarjeta_lista(request, producto_pk):
+    user = request.user
+    producto = Producto.objects.filter(pk=producto_pk)
+    beneficios = Beneficio.objects.filter(
+        producto=producto, tarjeta__isnull=False
+    )
+
+    tarjetas = []
+    for e in beneficios:
+        for x in e.tarjeta.all():
+            if x not in tarjetas:
+                tarjetas.append(x)
+
+    return render_to_response(
+        'Tarjeta/tarjeta/tarjeta_lista.html',
+        RequestContext(
+            request,
+            {
+                'tarjetas': tarjetas,
+            }
+        )
+    )

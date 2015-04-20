@@ -195,3 +195,31 @@ function ver_valor(url, pk, modal){
         dataType: 'html'
     });
 }
+
+function producto_selected(producto){
+    if (producto.value != ''){
+        var url = '/tarjeta/t/tarjeta_lista/'+producto.value+'/'
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(data){
+                $('#tarjetas').html(data);
+            },
+            dataType: 'html'
+        });
+    }
+}
+/*
+function producto_tarjeta(tarjeta){
+    var producto = $('#productos').val()
+    var tarjeta = tarjeta.value
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function(data){
+            $('#tarjetas').html(data);
+        },
+        dataType: 'html'
+    });
+}
+*/

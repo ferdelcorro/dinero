@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #APPS INSTALLED
     'bootstrap3',
-    'static_precompiler',
+    #'static_precompiler',
     #'multiselectfield',
     #'endless_pagination',
     #MY APPS
