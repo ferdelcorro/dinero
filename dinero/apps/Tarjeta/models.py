@@ -54,10 +54,10 @@ class Beneficio(models.Model):
         Producto, related_name='beneficio_producto',
         blank=True, null=True
     )
-    dias = models.ManyToManyField(Dia, blank=True, null=True)
+    dias = models.ManyToManyField(Dia, blank=True)
     tarjeta = models.ManyToManyField(
         Tarjeta, related_name='tarjeta_producto',
-        blank=True, null=True
+        blank=True
     )
 
     def __unicode__(self):

@@ -9,7 +9,6 @@ from django.shortcuts import (
 )
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
@@ -22,7 +21,7 @@ from apps.Producto.models import Producto
 from apps.Tarjeta.forms import TarjetaForm
 
 
-#Tarjetas
+# Tarjetas
 ################################################################################
 
 

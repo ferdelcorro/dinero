@@ -2,10 +2,10 @@
 import operator
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import Http404
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
@@ -17,7 +17,7 @@ from apps.Producto.models import Producto
 from apps.Producto.forms import ProductoForm
 
 
-#Productos
+# Productos
 ################################################################################
 
 
@@ -31,7 +31,7 @@ def cargar_producto(request):
             p = form.save(commit=False)
             p.user = request.user
             p.save()
-            return render_to_response('base.html',RequestContext(request,{}))
+            return render_to_response('base.html', RequestContext(request, {}))
     return render_to_response(
         'Producto/cargar_producto.html',
         RequestContext(
@@ -77,7 +77,6 @@ def cargar_producto_modal(request):
 
 @login_required
 def ver_productos(request):
-    user = request.user
     productos = Producto.objects.filter(user=request.user).order_by('nombre')
 
     paginator = Paginator(productos, 5)

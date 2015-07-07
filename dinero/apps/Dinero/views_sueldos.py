@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from datetime import date, datetime, timedelta
+from datetime import date
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from apps.funciones.views import json_response
 
@@ -14,7 +13,7 @@ from apps.Dinero.models import Sueldo
 from apps.Dinero.forms import SueldoForm
 
 
-#Sueldos
+# Sueldos
 ################################################################################
 
 
@@ -28,7 +27,7 @@ def cargar_sueldo(request):
             c = form.save(commit=False)
             c.user = request.user
             c.save()
-            return render_to_response('base.html',RequestContext(request,{}))
+            return render_to_response('base.html', RequestContext(request, {}))
     return render_to_response(
         'Dinero/sueldos/cargar_sueldo.html',
         RequestContext(
@@ -43,8 +42,6 @@ def cargar_sueldo(request):
 @login_required
 def ver_sueldos(request):
     user = request.user
-
-    dt = date.today()
     sueldos = Sueldo.objects.filter(user=user).order_by('-fecha')
 
     paginator = Paginator(sueldos, 5)
@@ -163,4 +160,3 @@ def modificar(request):
             errors = dict([(k, str(v[0])) for k, v in form.errors.items()])
             response['errors'] = errors
     return json_response(response)
-    

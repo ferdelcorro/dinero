@@ -2,10 +2,9 @@
 import operator
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
@@ -17,7 +16,7 @@ from apps.Tarjeta.models import Beneficio
 from apps.Tarjeta.forms import BeneficioForm
 
 
-#Beneficios
+# Beneficios
 ################################################################################
 
 @login_required
@@ -28,7 +27,7 @@ def cargar_beneficio(request):
         form = BeneficioForm(request.POST)
         if form.is_valid():
             form.save()
-            return render_to_response('base.html',RequestContext(request,{}))
+            return render_to_response('base.html', RequestContext(request, {}))
     return render_to_response(
         'Tarjeta/beneficio/cargar_beneficio.html',
         RequestContext(
@@ -42,7 +41,6 @@ def cargar_beneficio(request):
 
 @login_required
 def ver_beneficios(request):
-    user = request.user
     beneficios = Beneficio.objects.all()
 
     paginator = Paginator(beneficios, 5)
@@ -72,8 +70,12 @@ def buscar(request):
 
     if term:
         terms = term.split(' ')
-        qs1 = reduce(operator.or_, (Q(producto__nombre__icontains=n) for n in terms))
-        qs2 = reduce(operator.or_, (Q(descripcion__icontains=n) for n in terms))
+        qs1 = reduce(
+            operator.or_, (Q(producto__nombre__icontains=n) for n in terms)
+        )
+        qs2 = reduce(
+            operator.or_, (Q(descripcion__icontains=n) for n in terms)
+        )
 
         beneficios = beneficios.filter(Q(qs1) | Q(qs2))
 

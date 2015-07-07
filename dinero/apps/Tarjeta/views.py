@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-import operator
 
 from django.template import RequestContext
 from django.shortcuts import (
     render_to_response, HttpResponse, get_object_or_404
 )
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.core.paginator import (
     Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 )
+
+from apps.funciones import json_response
 
 from apps.Tarjeta.models import Beneficio, Tarjeta
 
@@ -51,13 +50,10 @@ def beneficio_selected(request, beneficios_id):
     response = {}
 
     if request.method == 'GET':
-        print 'hola'
         beneficio = get_object_or_404(
             Beneficio, pk=beneficios_id, tarjeta__user=request.user
         )
-        print beneficio
         form = BeneficioForm(instance=beneficio)
-        print form
         return render_to_response(
             'Tarjeta/beneficio/modal/_modificar_beneficio_modal_contenido.html',
             RequestContext(

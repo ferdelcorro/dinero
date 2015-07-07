@@ -4,7 +4,7 @@ from datetime import date
 from django.contrib.auth.forms import UserCreationForm
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
 from apps.Tarjeta.models import Beneficio

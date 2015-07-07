@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
-from datetime import date, datetime, timedelta
+from datetime import date
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.db.models import Q, Sum
+from django.db.models import Sum
 
 from apps.Dinero.models import Sueldo, Gasto
-from apps.Tarjeta.models import Beneficio
-
-from apps.Dinero.forms import SueldoForm, GastoForm
 
 
 #Balances
@@ -98,11 +94,6 @@ def filter_balance(request):
     date_from = request.GET.get('from', None)
     date_to = request.GET.get('to', None)
 
-    print date_from
-    print date_to
-
-    from datetime import datetime, date
-
     if date_from:
         date_from = date_from.split('/')
         date_from = date(
@@ -119,7 +110,7 @@ def filter_balance(request):
         gastos = gastos.filter(fecha__lte=date_to)
         sueldos = sueldos.filter(fecha__lte=date_to)
 
-    dic = {} #{'fecha': [sueldo, gastos]}
+    dic = {}# {'fecha': [sueldo, gastos]}
     for e in gastos:
         if e.fecha not in dic:
             dic[e.fecha] = [0, e.monto]

@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
-from datetime import date, datetime, timedelta
+from datetime import date
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response, HttpResponse, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
-from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from apps.funciones.views import json_response
 
-from apps.Dinero.models import Sueldo, Gasto
+from apps.Dinero.models import Gasto
 
-from apps.Dinero.forms import SueldoForm, GastoForm
+from apps.Dinero.forms import GastoForm
 from apps.Tarjeta.forms import TarjetaForm
 from apps.Producto.forms import ProductoForm
 
 
-
-
-#Gastos
+# Gastos
 ################################################################################
+
 
 @login_required
 def cargar_gasto(request):
@@ -33,7 +31,7 @@ def cargar_gasto(request):
             c = form.save(commit=False)
             c.user = request.user
             c.save()
-            return render_to_response('base.html',RequestContext(request,{}))
+            return render_to_response('base.html',RequestContext(request, {}))
 
     return render_to_response(
         'Dinero/gastos/cargar_gasto.html',
@@ -51,12 +49,11 @@ def cargar_gasto(request):
 @login_required
 def ver_gastos(request):
     user = request.user
-    dt = date.today()
     gastos = Gasto.objects.filter(
                 user=user,
             ).order_by('-fecha')
 
-    #paginator = Paginator(gastos, nro_row)
+    # paginator = Paginator(gastos, nro_row)
     paginator = Paginator(gastos, 5)
     page = request.GET.get('page')
     try:
@@ -83,7 +80,6 @@ def gastos_tabla(request):
     gastos = Gasto.objects.filter(user=user).order_by('-fecha')
 
     time = request.GET.get('time', None)
-    print time
 
     dt = date.today()
     if time == 'month':
@@ -93,8 +89,8 @@ def gastos_tabla(request):
                 )
     elif time == 'year':
         gastos = gastos.filter(fecha__year=dt.year)
-    
-    #paginator = Paginator(gastos, nro_row)
+
+    # paginator = Paginator(gastos, nro_row)
     paginator = Paginator(gastos, 5)
     page = request.GET.get('page')
     try:

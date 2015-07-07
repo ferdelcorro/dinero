@@ -38,12 +38,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #APPS INSTALLED
-    'bootstrap3',
-    #'static_precompiler',
-    #'multiselectfield',
-    #'endless_pagination',
-    #MY APPS
+    # APPS INSTALLED
+    # 'bootstrap3',
+    # 'static_precompiler',
+    # 'multiselectfield',
+    # 'endless_pagination',
+    # MY APPS
     'apps.Persona',
     'apps.Tarjeta',
     'apps.Producto',
